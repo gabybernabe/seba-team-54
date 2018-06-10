@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import Header from "./containers/Header/Header";
+import Participate from "./containers/HomePage/Participate"
 
 
 class App extends Component {
@@ -7,7 +8,7 @@ class App extends Component {
         return(
             <div>
                 <Header/>
-
+                    <Participate/>
             </div>
         );
     }

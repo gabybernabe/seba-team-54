@@ -215,7 +215,6 @@ class Header extends Component {
                     <LoginList>
                         <LoginIcon className="material-icons">account_box</LoginIcon>
                         <LoginItem> Login </LoginItem>
-
                     </LoginList>
                 </NavBar>
             </DivHeader>
