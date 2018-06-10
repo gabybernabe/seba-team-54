@@ -4,7 +4,7 @@ import styled from 'styled-components';
 const DivHeader = styled.div`
     padding-right: 15px;
     padding-left: 15px;
-    margin-right: -10px;
+    margin-right: -8px;
     margin-top: -10px;
     margin-left: -10px;
     background-color: #f8f8f8;

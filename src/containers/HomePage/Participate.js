@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Card, CardTitle, CardText, Slider } from 'react-md';
 
 
 
@@ -132,7 +133,7 @@ class Participate extends Component {
     }
     render() {
         return (
-            <div>
+            <div style={{backgroundColor:'white'}}>
                 <Title>Find an available hike</Title>
                 <DivLevel>
                     <Text>Select the level of experience:</Text>
@@ -149,43 +150,44 @@ class Participate extends Component {
                    </Picker>
                 </DivLevel>
                 <br></br>
-                <div style={{marginTop:'2.9%'}} >
-                    <Columns>
-                        <DivResultList>
-                            <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
+                <div style={{marginTop:'2.9%', display:'flex', marginLeft:'30px'}} >
+                    <Card style ={{width:'23.333%', marginLeft:'50px', marginRight:'50px'}}>
+                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
                              style={{width:'100%'}}/>
-                            <h4 style={{marginLeft:'20px'}}>First Hike Result</h4>
+                        <CardTitle title="Hike1 " subtitle="Munich" />
+                        <CardText>
                             <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
                                 crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
                                 lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
                                 pack your backpack and head up onto a mountain!</p>
                             <ParticipateButton>More Info</ParticipateButton>
-                        </DivResultList>
-                    </Columns>
-                    <Columns>
-                        <DivResultList>
-                            <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
+                        </CardText>
+                    </Card>
+                    <Card style ={{width:'23.333%',  marginLeft:'50px', marginRight:'50px'} }>
+                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
                              style={{width:'100%'}}/>
-                            <h4 style={{marginLeft:'20px'}}>Second Hike Result</h4>
+                        <CardTitle title="Hike2 " subtitle="Munich" />
+                        <CardText>
                             <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
                                 crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
                                 lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
                                 pack your backpack and head up onto a mountain!</p>
                             <ParticipateButton>More Info</ParticipateButton>
-                        </DivResultList>
-                    </Columns>
-                    <Columns>
-                        <DivResultList>
-                            <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
+                        </CardText>
+                    </Card>
+                    <Card style ={{width:'23.333%',  marginLeft:'50px'} }>
+                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
                              style={{width:'100%'}}/>
-                            <h4 style={{marginLeft:'20px'}}>Third Hike Result</h4>
+                        <CardTitle title="Hike3 " subtitle="Munich" />
+                        <CardText>
                             <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
                                 crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
                                 lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
                                 pack your backpack and head up onto a mountain!</p>
                             <ParticipateButton>More Info</ParticipateButton>
-                        </DivResultList>
-                    </Columns>
+                        </CardText>
+                    </Card>
+
                 </div>
 
             </div>
