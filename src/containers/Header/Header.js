@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const DivHeader = styled.div`
     padding-right: 15px;
@@ -52,6 +53,7 @@ const ItemList = styled.li`
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     touch-action: manipulation;
     cursor: pointer;
+    text-decoration:none;
     user-select: none;
     &:hover {
         background-color:#fff; 
@@ -198,9 +200,9 @@ class Header extends Component {
                 <NavBar>
                     <WebSiteName>Hikeup</WebSiteName>
                     <ItemsUl>
-                        <ItemList>Participate</ItemList>
-                        <ItemList>Organize</ItemList>
-                        <ItemList>Reviews</ItemList>
+                        <ItemList><Link to={"/"} style={{textDecoration:"none"}}>Participate</Link></ItemList>
+                        <ItemList><Link to={"/organize"} style={{textDecoration:"none"}}>Organize</Link></ItemList>
+                        <ItemList><Link to={"/reviews"} style={{textDecoration:"none"}}>Reviews</Link></ItemList>
                     </ItemsUl>
                     <SearchBarForm>
                         <DivSearchBar>

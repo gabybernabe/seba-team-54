@@ -1,4 +1,4 @@
-import React, { Component, PureComponent} from 'react';
+import React, { Component} from 'react';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
