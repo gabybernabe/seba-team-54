@@ -1,6 +1,6 @@
-import React, { Component} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {Link, withRouter} from 'react-router-dom';
 
 const DivHeader = styled.div`
     padding-right: 15px;
@@ -193,7 +193,7 @@ const LoginIcon = styled.i`
 `;
 
 
-class Header extends Component {
+class Header extends React.Component {
     render(){
         return(
             <DivHeader>
@@ -224,4 +224,4 @@ class Header extends Component {
     }
 }
 
-export default Header;
+export default withRouter(Header);
