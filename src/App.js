@@ -2,6 +2,7 @@ import React, { Component} from 'react';
 import {  BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import Header from "./containers/components/Header";
+import Home from "./containers/views/Home"
 import Participate from "./containers/views/Participate";
 import Organize from "./containers/views/Organize";
 import Reviews from "./containers/views/Reviews";
@@ -14,7 +15,8 @@ class App extends Component {
         this.state = {
             title: 'Event App',
             routes: [
-                { component: Participate , path: '/', exact: true},
+                { component: Home , path: '/', exact: true},
+                { component: Participate , path: '/participate'},
                 { component: Organize , path: '/organize', exact: true},
                 { component: Reviews , path: '/reviews', exact: true}
                 //{ component: MovieDetailView , path: '/show/:id'},

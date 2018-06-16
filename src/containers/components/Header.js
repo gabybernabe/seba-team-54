@@ -200,9 +200,10 @@ class Header extends React.Component {
                 <NavBar>
                     <WebSiteName>Hikeup</WebSiteName>
                     <ItemsUl>
-                        <ItemList><Link to={"/"} style={{textDecoration:"none"}}>Participate</Link></ItemList>
+                        <ItemList><Link to={"/"} style={{textDecoration:"none"}}>Home</Link></ItemList>
                         <ItemList><Link to={"/organize"} style={{textDecoration:"none"}}>Organize</Link></ItemList>
                         <ItemList><Link to={"/reviews"} style={{textDecoration:"none"}}>Reviews</Link></ItemList>
+                        <ItemList><Link to={"/participate"} style={{textDecoration:"none"}}>Participate</Link></ItemList>
                     </ItemsUl>
                     <SearchBarForm>
                         <DivSearchBar>
