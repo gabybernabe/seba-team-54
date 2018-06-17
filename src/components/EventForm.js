@@ -18,11 +18,15 @@ class EventForm extends React.Component {
 
         this.state = {
             title : '',
-            date : ''
+            date : '',
+            description : '',
+            participants: ''
         };
 
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeDate = this.handleChangeDate.bind(this);
+        this.handleChangeDescription = this.handleChangeDescription.bind(this);
+        this.handleChangeParticipants = this.handleChangeParticipants.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
@@ -32,6 +36,14 @@ class EventForm extends React.Component {
 
     handleChangeDate(value) {
         this.setState(Object.assign({}, this.state, {date: value}));
+    }
+
+    handleChangeDescription(value) {
+        this.setState(Object.assign({}, this.state, {description: value}));
+    }
+
+    handleChangeParticipants(value) {
+        this.setState(Object.assign({}, this.state, {participants: value}));
     }
 
     handleSubmit(submitEvent) {
@@ -44,6 +56,8 @@ class EventForm extends React.Component {
 
         event.title = this.state.title;
         event.date = this.state.date;
+        event.description = this.state.description;
+        event.participants = this.state.participants;
 
         this.props.onSubmit(event);
     }
@@ -72,7 +86,22 @@ class EventForm extends React.Component {
                             value={this.state.date}
                             onChange={this.handleChangeDate}
                             errorText="Date is required"/>
-
+                        <TextField
+                            label="Description"
+                            id="DescriptionField"
+                            type="string"
+                            className="md-row"
+                            required={false}
+                            value={this.state.description}
+                            onChange={this.handleChangeDescription}/>
+                        <TextField
+                            label="Participants"
+                            id="ParticipantsField"
+                            type="number"
+                            className="md-row"
+                            required={false}
+                            value={this.state.participants}
+                            onChange={this.handleChangeParticipants}/>
                         <Button id="submit" type="submit"
                                 disabled={this.state.title == undefined || this.state.title == '' || this.state.date == undefined || this.state.date == ''}
                                 raised primary className="md-cell md-cell--2">Save</Button>
