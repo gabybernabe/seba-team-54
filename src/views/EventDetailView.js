@@ -4,7 +4,7 @@ import { EventDetail } from '../components/EventDetail';
 
 import EventService from '../services/EventService';
 
-class Participate extends React.Component {
+class EventDetailView extends React.Component {
 
     constructor(props) {
         super(props);
@@ -39,4 +39,4 @@ class Participate extends React.Component {
     }
 }
 
-export default Participate;
+export default EventDetailView;

@@ -1,9 +1,9 @@
 import React from 'react';
 import {  BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Home from "./views/Home"
-import Participate from "./views/Participate";
-import Organize from "./views/Organize";
+import EventListView from "./views/EventListView"
+import EventDetailView from "./views/EventDetailView";
+import EventFormView from "./views/EventFormView";
 import Reviews from "./views/Reviews";
 
 
@@ -13,9 +13,9 @@ class App extends React.Component {
 
         this.state = {
             routes: [
-                { component: Home , path: '/', exact: true},
-                { component: Participate , path: '/participate/:id'},
-                { component: Organize , path: '/organize', exact: true},
+                { component: EventListView , path: '/', exact: true},
+                { component: EventDetailView , path: '/participate/:id'},
+                { component: EventFormView , path: '/organize', exact: true},
                 { component: Reviews , path: '/reviews', exact: true}
             ]
         };

@@ -5,7 +5,7 @@ import EventService from '../services/EventService';
 
 import Page from '../components/Page';
 
-class Organize extends Component {
+class EventFormView extends Component {
 
     constructor(props) {
         super(props);
@@ -42,4 +42,4 @@ class Organize extends Component {
     }
 }
 
-export default Organize
+export default EventFormView
