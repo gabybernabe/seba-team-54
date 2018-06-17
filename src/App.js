@@ -16,7 +16,7 @@ class App extends Component {
             title: 'Event App',
             routes: [
                 { component: Home , path: '/', exact: true},
-                { component: Participate , path: '/participate'},
+                { component: Participate , path: '/participate', exact: true},
                 { component: Organize , path: '/organize', exact: true},
                 { component: Reviews , path: '/reviews', exact: true}
                 //{ component: MovieDetailView , path: '/show/:id'},
