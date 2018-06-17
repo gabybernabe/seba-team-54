@@ -1,9 +1,13 @@
-import React, { Component} from 'react';
+import React from 'react';
+
+import EventService from '../services/EventService';
+import { EventList } from '../components/EventList';
+
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Card, CardTitle, CardText, Slider } from 'react-md';
+import { Card, CardTitle, CardText } from 'react-md';
 import Page from '../components/Page'
 
 const Title = styled.label`
@@ -75,26 +79,6 @@ const Picker = styled.div`
     display: flex;
 `;
 
-const Columns = styled.div`
-    width: 33.33333333%;
-    float: left;
-    position: relative;
-    min-height: 1px;
-    padding-right: 45px;
-    padding-left: 45px;
-    box-sizing: border-box;
-    display: block;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    text-align: left; 
-`;
-
-const DivResultList =styled.div`
-    box-sizing: border-box;
-    border-style: solid;
-    border-radius: 4px;
-    border-color: #ccc; 
-`;
-
 const HomeButton = styled.button`
     color: #fff;
     background-color: #337ab7;
@@ -119,22 +103,47 @@ const HomeButton = styled.button`
     margin-left:70%;
 `;
 
-class Home extends Component {
+class EventListView extends React.Component {
 
     constructor(props){
-        super(props)
-        this.state = {date: moment()};
+        super(props);
+        this.state = {
+            loading: false,
+            data: [],
+            date: ''
+        };
         this.dateChanged = this.dateChanged.bind(this);
+    }
+
+    componentWillMount(){
+        this.setState({
+            loading: true
+        });
+
+        EventService.getEvents().then((data) => {
+            this.setState({
+                data: [...data],
+                loading: false
+            });
+        }).catch((e) => {
+            console.error(e);
+        });
     }
 
     dateChanged(d){
         this.setState({date: d});
     }
+
     render() {
+        if (this.state.loading) {
+            return (<Page><h2>Loading...</h2></Page>);
+        }
+
         return (
             <Page>
             <div style={{backgroundColor:'white'}}>
                 <Title>Find an available hike</Title>
+
                 <DivLevel>
                     <Text>Select the level of experience:</Text>
                     <LevelButton  id="level">
@@ -189,11 +198,11 @@ class Home extends Component {
                     </Card>
 
                 </div>
-
+                <EventList data={this.state.data}/>
             </div>
             </Page>
         );
     }
 }
 
-export default Home;
+export default EventListView;

@@ -1,18 +1,15 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import DatePicker from 'react-datepicker';
-import moment from 'moment';
-import 'react-datepicker/dist/react-datepicker.css';
-import { Card, CardTitle, CardText } from 'react-md';
-import Page from '../components/Page'
+"use strict";
+
+import React from 'react';
+import { Card, CardTitle, CardText} from 'react-md';
+
+import EventService from '../services/EventService';
+
+import Page from './Page';
+import styled from "styled-components";
 import Slider from "react-slick";
 
-const Title = styled.label`
-    padding: 15px 15px;
-    font-size: 24px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-
-`;
+const style = { maxWidth: 500 };
 
 const DivLevel = styled.div`
     position: relative;
@@ -21,79 +18,12 @@ const DivLevel = styled.div`
     margin-top: 40px;
     height:34px;
 `;
+
 const Text = styled.label`
     padding: 15px 45px;
     font-size: 16px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     width: 30%;
-`;
-
-const LevelButton = styled.select`
-    color: #333;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    background-color: #dfdfdf;
-    border-color: #ccc;
-    padding: 8px 12px;
-    margin-bottom: 0;
-    font-size: 12px;
-    font-weight: 400;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    text-transform: none;
-    overflow: visible;
-    margin: 0;
-    font: inherit;
-    box-sizing: border-box;
-`;
-
-const LevelList = styled.option`
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    float: left;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
-    font-size: 14px;
-    text-align: left;
-    list-style: none;
-    background-color: #fff;
-    background-clip: padding-box;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;   
-`;
-const Picker = styled.div`
-    width: 50%;
-    padding: 8px 10px 5px;
-    vertical-align: baseline;
-    display: block;
-    display: flex;
-`;
-
-const Columns = styled.div`
-    width: 33.33333333%;
-    float: left;
-    position: relative;
-    min-height: 1px;
-    padding-right: 45px;
-    padding-left: 45px;
-    box-sizing: border-box;
-    display: block;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    text-align: left; 
-`;
-
-const DivResultList = styled.div`
-    box-sizing: border-box;
-    border-style: solid;
-    border-radius: 4px;
-    border-color: #ccc; 
 `;
 
 const HomeButton = styled.button`
@@ -120,7 +50,11 @@ const HomeButton = styled.button`
     margin-left:70%;
 `;
 
-class Participate extends Component {
+export class EventDetail extends React.Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     render() {
         const settings = {
@@ -132,8 +66,22 @@ class Participate extends Component {
             slidesToScroll: 1,
             initialSlide: 2,
         };
+
         return (
             <Page>
+                <Card style={style} className="md-block-centered">
+                    <CardTitle title={this.props.event.title} subtitle={this.props.event.description} />
+
+                    <CardText>
+                        <p>
+                            {this.props.event.location}
+                        </p>
+                        <p>
+                            {this.props.event.participants}
+                        </p>
+                    </CardText>
+                </Card>
+
                 <div style={{ backgroundColor: 'none' }}>
                     <h1>Find an available hike</h1>
                     <div style={{ marginTop: '2.9%', width: '100%', height: '100%', display: 'flex', marginLeft: '30px' }} >
@@ -175,10 +123,10 @@ class Participate extends Component {
                                 <li><h3>Description</h3></li>
                                 <CardText>
                                     <p style={{ fontSize: '16px', marginLeft: '1px', textAlign: 'justify' }}>
-                                    If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
-                                    crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
-                                    lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
-                                    pack your backpack and head up onto a mountain!</p>
+                                        If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
+                                        crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
+                                        lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
+                                        pack your backpack and head up onto a mountain!</p>
                                     <br></br>
                                     <HomeButton>Confirm participation</HomeButton>
                                 </CardText>
@@ -202,5 +150,3 @@ class Participate extends Component {
         );
     }
 }
-
-export default Participate;
