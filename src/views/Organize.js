@@ -1,9 +1,9 @@
 import React, { Component} from 'react';
-import { Card} from 'react-md';
 
 import EventForm from './../components/EventForm';
 import EventService from '../services/EventService';
 
+import Page from '../components/Page';
 
 class Organize extends Component {
 
@@ -33,7 +33,12 @@ class Organize extends Component {
             return (<h2>Loading...</h2>);
         }
 
-        return (<EventForm event={this.state.event} onSubmit={(event) => this.updateEvent(event)} error={this.state.error} />);
+        return (
+            <Page>
+                <h1>Organize a hike</h1>
+                <EventForm event={this.state.event} onSubmit={(event) => this.updateEvent(event)} error={this.state.error} />
+            </Page>
+        );
     }
 }
 

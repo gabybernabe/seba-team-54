@@ -10,6 +10,8 @@ export const EventList = ({data}) => (
             <TableHeader>
                 <TableRow>
                     <TableColumn>Name</TableColumn>
+                    <TableColumn>Description</TableColumn>
+                    <TableColumn>Start</TableColumn>
                 </TableRow>
             </TableHeader>
             <TableBody>
