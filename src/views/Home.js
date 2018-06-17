@@ -6,6 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { Card, CardTitle, CardText, Slider } from 'react-md';
 import Page from '../components/Page'
 
+import EventService from '../services/EventService';
+
 const Title = styled.label`
     padding: 15px 15px;
     font-size: 24px;
@@ -123,14 +125,38 @@ class Home extends Component {
 
     constructor(props){
         super(props)
-        this.state = {date: moment()};
+        this.state = {loading: false,
+            data: [], date: moment()};
         this.dateChanged = this.dateChanged.bind(this);
+    }
+
+    componentWillMount(){
+        this.setState({
+            loading: true
+        });
+
+        EventService.getEvents().then((data) => {
+            this.setState({
+                data: [...data],
+                loading: false
+            });
+        }).catch((e) => {
+            console.error(e);
+        });
     }
 
     dateChanged(d){
         this.setState({date: d});
     }
     render() {
+        if (this.state.loading) {
+            return (
+                <Page>
+                     <h2>Loading...</h2>
+                </Page>
+            );
+        }
+
         return (
             <Page>
             <div style={{backgroundColor:'white'}}>

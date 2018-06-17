@@ -1,11 +1,11 @@
 import React, { Component} from 'react';
 import {  BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
-import Header from "./containers/components/Header";
-import Home from "./containers/views/Home"
-import Participate from "./containers/views/Participate";
-import Organize from "./containers/views/Organize";
-import Reviews from "./containers/views/Reviews";
+import Header from "./components/Header";
+import Home from "./views/Home"
+import Participate from "./views/Participate";
+import Organize from "./views/Organize";
+import Reviews from "./views/Reviews";
 
 
 class App extends Component {
