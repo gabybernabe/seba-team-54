@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Card, CardTitle, CardText, Slider } from 'react-md';
+import { Card, CardTitle, CardText } from 'react-md';
 import Page from '../components/Page'
 
 import EventService from '../services/EventService';
+import { EventList } from '../components/EventList';
+
 
 const Title = styled.label`
     padding: 15px 15px;
@@ -77,26 +79,6 @@ const Picker = styled.div`
     display: flex;
 `;
 
-const Columns = styled.div`
-    width: 33.33333333%;
-    float: left;
-    position: relative;
-    min-height: 1px;
-    padding-right: 45px;
-    padding-left: 45px;
-    box-sizing: border-box;
-    display: block;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    text-align: left; 
-`;
-
-const DivResultList =styled.div`
-    box-sizing: border-box;
-    border-style: solid;
-    border-radius: 4px;
-    border-color: #ccc; 
-`;
-
 const HomeButton = styled.button`
     color: #fff;
     background-color: #337ab7;
@@ -124,9 +106,12 @@ const HomeButton = styled.button`
 class Home extends Component {
 
     constructor(props){
-        super(props)
-        this.state = {loading: false,
-            data: [], date: moment()};
+        super(props);
+        this.state = {
+            loading: false,
+            data: [],
+            date: moment()
+        };
         this.dateChanged = this.dateChanged.bind(this);
     }
 
@@ -161,6 +146,7 @@ class Home extends Component {
             <Page>
             <div style={{backgroundColor:'white'}}>
                 <Title>Find an available hike</Title>
+
                 <DivLevel>
                     <Text>Select the level of experience:</Text>
                     <LevelButton  id="level">
@@ -215,8 +201,10 @@ class Home extends Component {
                     </Card>
 
                 </div>
-
+                <EventList data={this.state.data}/>
             </div>
+
+
             </Page>
         );
     }
