@@ -1,10 +1,11 @@
-import React, { Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Card, CardTitle, CardText, Slider } from 'react-md';
+import { Card, CardTitle, CardText } from 'react-md';
 import Page from '../components/Page'
+import Slider from "react-slick";
 
 const Title = styled.label`
     padding: 15px 15px;
@@ -50,7 +51,7 @@ const LevelButton = styled.select`
     box-sizing: border-box;
 `;
 
-const LevelList =styled.option`
+const LevelList = styled.option`
     display: block;
     position: absolute;
     top: 100%;
@@ -88,14 +89,14 @@ const Columns = styled.div`
     text-align: left; 
 `;
 
-const DivResultList =styled.div`
+const DivResultList = styled.div`
     box-sizing: border-box;
     border-style: solid;
     border-radius: 4px;
     border-color: #ccc; 
 `;
 
-const ParticipateButton = styled.button`
+const HomeButton = styled.button`
     color: #fff;
     background-color: #337ab7;
     border-color: #2e6da4;
@@ -121,76 +122,82 @@ const ParticipateButton = styled.button`
 
 class Participate extends Component {
 
-    constructor(props){
-        super(props)
-        this.state = {date: moment()};
-        this.dateChanged = this.dateChanged.bind(this);
-    }
-
-    dateChanged(d){
-        this.setState({date: d});
-    }
     render() {
+        const settings = {
+            dots: true,
+            lazyLoad: true,
+            infinite: true,
+            speed: 500,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            initialSlide: 2,
+        };
         return (
             <Page>
-            <div style={{backgroundColor:'white'}}>
-                <Title>Find an available hike</Title>
-                <DivLevel>
-                    <Text>Select the level of experience:</Text>
-                    <LevelButton  id="level">
-                        <LevelList>Easy</LevelList>
-                        <LevelList>Medium</LevelList>
-                        <LevelList>Difficult</LevelList>
-                        <LevelList>Expert</LevelList>
-                    </LevelButton>
-                    <Text style={{marginLeft:'10%'}}>Select a Date for the hike:</Text>
-                   <Picker>
-                    <DatePicker style={{borderRadius:'4px'}} selected={this.state.date}
-                                onChange={this.dateChanged}  />
-                   </Picker>
-                </DivLevel>
-                <br></br>
-                <div style={{marginTop:'2.9%', display:'flex', marginLeft:'30px'}} >
-                    <Card style ={{width:'23.333%', marginLeft:'50px', marginRight:'50px'}}>
-                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
-                             style={{width:'100%'}}/>
-                        <CardTitle title="Hike1 " subtitle="Munich" />
-                        <CardText>
-                            <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
-                                crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
-                                lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
-                                pack your backpack and head up onto a mountain!</p>
-                            <ParticipateButton>More Info</ParticipateButton>
-                        </CardText>
-                    </Card>
-                    <Card style ={{width:'23.333%',  marginLeft:'50px', marginRight:'50px'} }>
-                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
-                             style={{width:'100%'}}/>
-                        <CardTitle title="Hike2 " subtitle="Munich" />
-                        <CardText>
-                            <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
-                                crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
-                                lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
-                                pack your backpack and head up onto a mountain!</p>
-                            <ParticipateButton>More Info</ParticipateButton>
-                        </CardText>
-                    </Card>
-                    <Card style ={{width:'23.333%',  marginLeft:'50px'} }>
-                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
-                             style={{width:'100%'}}/>
-                        <CardTitle title="Hike3 " subtitle="Munich" />
-                        <CardText>
-                            <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
-                                crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
-                                lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
-                                pack your backpack and head up onto a mountain!</p>
-                            <ParticipateButton>More Info</ParticipateButton>
-                        </CardText>
-                    </Card>
+                <div style={{ backgroundColor: 'none' }}>
+                    <h1>Find an available hike</h1>
+                    <div style={{ marginTop: '2.9%', width: '100%', height: '100%', display: 'flex', marginLeft: '30px' }} >
+                        <Card style={{ width: '50%', height: '40%', marginLeft: '50px', marginRight: '50px' }}>
+                            <Slider {...settings}>
+                                <div>
+                                    <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" />
+                                </div>
+                                <div>
+                                    <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" />
+                                </div>
+                                <div>
+                                    <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" />
+                                </div>
+                                <div>
+                                    <img src="http://placekitten.com/g/400/200" />
+                                </div>
+                            </Slider>
+                            <CardTitle title="Name of the Hike " subtitle="Garmisch" />
+                            <CardText>
+                            </CardText>
+                        </Card>
+                        <Card style={{ width: '30%', height: '40%', marginLeft: '50px', marginRight: '50px' }}>
+                            <img src={"https://www.outdooractive.com/api/staticmap?i=1044790&size=large&project=outdooractive"}/>
+                            <CardText>
+                                <HomeButton>Watch Route</HomeButton>
+                            </CardText>
+                        </Card>
+                    </div>
+                    <br></br>
 
+                    <DivLevel>
+                        <Text style={{ width: '50%' }}>
+                            <ul>
+                                <li>Tomorrow from 07:30 to 16:00</li>
+                                <li>München Hbf, Platform 27</li>
+                                <li>20/25</li>
+                                <br></br>
+                                <li><h3>Description</h3></li>
+                                <CardText>
+                                    <p style={{ fontSize: '16px', marginLeft: '1px', textAlign: 'justify' }}>
+                                    If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
+                                    crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
+                                    lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
+                                    pack your backpack and head up onto a mountain!</p>
+                                    <br></br>
+                                    <HomeButton>Confirm participation</HomeButton>
+                                </CardText>
+                            </ul>
+                        </Text>
+                        <Text style={{ marginLeft: '6%' }}>
+                            <ul>
+                                <li><h3>Route Details</h3></li>
+                                <li>Distance: 10.5 km</li>
+                                <li>Duration: 4 h</li>
+                                <li>Up: 821 m</li>
+                                <li>Down: 600 m</li>
+                                <br></br>
+                                <li><h3>Rating</h3></li>
+                                <li>3.4/5</li>
+                            </ul>
+                        </Text>
+                    </DivLevel>
                 </div>
-
-            </div>
             </Page>
         );
     }

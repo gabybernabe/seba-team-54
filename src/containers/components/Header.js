@@ -198,11 +198,11 @@ class Header extends React.Component {
         return(
             <DivHeader>
                 <NavBar>
-                    <WebSiteName>Hikeup</WebSiteName>
+                    <WebSiteName><Link to={"/"} style={{textDecoration:"none"}}>Hikup</Link></WebSiteName>
                     <ItemsUl>
-                        <ItemList><Link to={"/"} style={{textDecoration:"none"}}>Participate</Link></ItemList>
                         <ItemList><Link to={"/organize"} style={{textDecoration:"none"}}>Organize</Link></ItemList>
                         <ItemList><Link to={"/reviews"} style={{textDecoration:"none"}}>Reviews</Link></ItemList>
+                        <ItemList><Link to={"/participate"} style={{textDecoration:"none"}}>Participate</Link></ItemList>
                     </ItemsUl>
                     <SearchBarForm>
                         <DivSearchBar>
