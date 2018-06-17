@@ -4,8 +4,7 @@ import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Card, CardTitle, CardText, Slider } from 'react-md';
-
-
+import Page from '../components/Page'
 
 const Title = styled.label`
     padding: 15px 15px;
@@ -133,6 +132,7 @@ class Participate extends Component {
     }
     render() {
         return (
+            <Page>
             <div style={{backgroundColor:'white'}}>
                 <Title>Find an available hike</Title>
                 <DivLevel>
@@ -191,6 +191,7 @@ class Participate extends Component {
                 </div>
 
             </div>
+            </Page>
         );
     }
 }

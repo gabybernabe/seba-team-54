@@ -1,13 +1,12 @@
 {
   "name": "seba-hiking-webapp",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "SEBA Hiking Web Frontend Application React",
+  "private": true,
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config webpack.prod.js",
+    "start": "webpack-dev-server --open 'Google Chrome' --config webpack.dev.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +18,9 @@
     "url": "https://github.com/gabybernabe/seba-team-54/issues"
   },
   "homepage": "https://github.com/gabybernabe/seba-team-54#readme",
+  "engines": {
+    "node": ">=4.3"
+  },
   "devDependencies": {
     "babel-core": "6.25.0",
     "babel-loader": "7.1.1",
@@ -35,14 +37,16 @@
     "webpack-merge": "4.1.0"
   },
   "dependencies": {
-    "@material-ui/core": "^1.1.0",
+    "@material-ui/core": "^1.2.1",
+    "ajv": "^6.5.1",
     "from": "^0.1.7",
     "hamburgers": "^0.9.3",
+    "material-ui": "^0.20.1",
     "material-ui-flat-pagination": "^2.1.3",
     "moment": "^2.22.2",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
-    "react-bootstrap": "^0.32.1",
+    "react-bootstrap": "^0.31.5",
     "react-bootstrap-date-picker": "^5.1.0",
     "react-datepicker": "^1.5.0",
     "react-dom": "^16.4.0",
