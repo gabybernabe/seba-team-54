@@ -100,7 +100,7 @@ class EventForm extends React.Component {
                         <TextField
                             label="Departure location"
                             id="LocationField"
-                            type="string"
+                            type="text"
                             className="md-row"
                             required={true}
                             value={this.state.location}
@@ -109,7 +109,7 @@ class EventForm extends React.Component {
                         <TextField
                             label="Start"
                             id="StartField"
-                            type="string"
+                            type="text"
                             className="md-row"
                             required={true}
                             value={this.state.start}
@@ -118,7 +118,7 @@ class EventForm extends React.Component {
                         <TextField
                             label="End"
                             id="EndField"
-                            type="string"
+                            type="text"
                             className="md-row"
                             required={true}
                             value={this.state.end}
@@ -127,7 +127,7 @@ class EventForm extends React.Component {
                         <TextField
                             label="Description"
                             id="DescriptionField"
-                            type="string"
+                            type="text"
                             className="md-row"
                             required={false}
                             value={this.state.description}
@@ -143,7 +143,7 @@ class EventForm extends React.Component {
                         <TextField
                             label="Transport"
                             id="TransportsField"
-                            type="string"
+                            type="text"
                             className="md-row"
                             required={false}
                             value={this.state.transport}

@@ -1,7 +1,9 @@
 "use strict";
 
 import React from 'react';
-import { TableRow, TableColumn, FontIcon, Button } from 'react-md';
+import { TableRow, TableColumn } from 'react-md';
+
+import { SimpleLink } from './SimpleLink';
 
 export class EventListRow extends React.Component {
 
@@ -12,7 +14,7 @@ export class EventListRow extends React.Component {
     render() {
         return (
             <TableRow key={this.props.key}>
-                <TableColumn>{this.props.event.title}</TableColumn>
+                <TableColumn><SimpleLink to={`/participate/${this.props.event._id}`}>{this.props.event.title}</SimpleLink></TableColumn>
                 <TableColumn>{this.props.event.description}</TableColumn>
                 <TableColumn>{this.props.event.start}</TableColumn>
             </TableRow>

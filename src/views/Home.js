@@ -1,14 +1,14 @@
-import React, { Component} from 'react';
+import React from 'react';
+
+import EventService from '../services/EventService';
+import { EventList } from '../components/EventList';
+
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Card, CardTitle, CardText } from 'react-md';
 import Page from '../components/Page'
-
-import EventService from '../services/EventService';
-import { EventList } from '../components/EventList';
-
 
 const Title = styled.label`
     padding: 15px 15px;
@@ -103,14 +103,14 @@ const HomeButton = styled.button`
     margin-left:70%;
 `;
 
-class Home extends Component {
+class Home extends React.Component {
 
     constructor(props){
         super(props);
         this.state = {
             loading: false,
             data: [],
-            date: moment()
+            date: ''
         };
         this.dateChanged = this.dateChanged.bind(this);
     }
@@ -133,13 +133,10 @@ class Home extends Component {
     dateChanged(d){
         this.setState({date: d});
     }
+
     render() {
         if (this.state.loading) {
-            return (
-                <Page>
-                     <h2>Loading...</h2>
-                </Page>
-            );
+            return (<Page><h2>Loading...</h2></Page>);
         }
 
         return (
@@ -203,8 +200,6 @@ class Home extends Component {
                 </div>
                 <EventList data={this.state.data}/>
             </div>
-
-
             </Page>
         );
     }
