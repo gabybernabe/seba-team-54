@@ -10,8 +10,11 @@ export const EventList = ({data, onDelete}) => (
             <TableHeader>
                 <TableRow>
                     <TableColumn>Name</TableColumn>
+                    <TableColumn>Organizer</TableColumn>
                     <TableColumn>Description</TableColumn>
                     <TableColumn>Start</TableColumn>
+                    <TableColumn>Edit</TableColumn>
+                    <TableColumn>Delete</TableColumn>
                 </TableRow>
             </TableHeader>
             <TableBody>

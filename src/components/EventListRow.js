@@ -17,6 +17,7 @@ export class EventListRow extends React.Component {
         return (
             <TableRow key={this.props.key}>
                 <TableColumn><SimpleLink to={`/participate/${this.props.event._id}`}>{this.props.event.title}</SimpleLink></TableColumn>
+                <TableColumn>{this.props.event.organiserUsername}</TableColumn>
                 <TableColumn>{this.props.event.description}</TableColumn>
                 <TableColumn>{this.props.event.start}</TableColumn>
                 {UserService.isAuthenticated() ?
