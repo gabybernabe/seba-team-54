@@ -43,8 +43,8 @@ class Header extends React.Component {
                     <NavItem eventKey={2} onClick={() => this.props.history.push('/organize')}>
                         Organize
                     </NavItem>
-                    <NavItem eventKey={3} onClick={() => this.props.history.push('/reviews')}>
-                        Reviews
+                    <NavItem eventKey={3} onClick={() => this.props.history.push('/blog')}>
+                        Blog
                     </NavItem>
                 </Nav>
                 <Nav pullRight>
