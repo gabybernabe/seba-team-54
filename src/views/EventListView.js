@@ -134,6 +134,25 @@ class EventListView extends React.Component {
         this.setState({date: d});
     }
 
+    deleteEvent(id){
+        this.setState({
+            data: [...this.state.data],
+            loading: true
+        });
+        EventService.deleteEvent(id).then((message) => {
+
+            let eventIndex = this.state.data.map(event => event['_id']).indexOf(id);
+            let events = this.state.data;
+            events.splice(eventIndex, 1);
+            this.setState({
+                data: [...events],
+                loading: false
+            });
+        }).catch((e) => {
+            console.error(e);
+        });
+    }
+
     render() {
         if (this.state.loading) {
             return (<Page><h2>Loading...</h2></Page>);
@@ -198,7 +217,7 @@ class EventListView extends React.Component {
                     </Card>
 
                 </div>
-                <EventList data={this.state.data}/>
+                <EventList data={this.state.data} onDelete={(id) => this.deleteEvent(id)}/>
             </div>
             </Page>
         );

@@ -3,8 +3,6 @@
 import React from 'react';
 import { Card, CardTitle, CardText} from 'react-md';
 
-import EventService from '../services/EventService';
-
 import Page from './Page';
 import styled from "styled-components";
 import Slider from "react-slick";
