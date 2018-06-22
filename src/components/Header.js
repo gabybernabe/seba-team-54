@@ -37,14 +37,14 @@ class Header extends React.Component {
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav>
-                    <NavItem eventKey={1}>
-                        <SimpleLink to={`/`}>Participate</SimpleLink>
+                    <NavItem eventKey={1} onClick={() => this.props.history.push('/')}>
+                        Participate
                     </NavItem>
-                    <NavItem eventKey={2}>
-                        <SimpleLink to={`/organize`}>Organize</SimpleLink>
+                    <NavItem eventKey={2} onClick={() => this.props.history.push('/organize')}>
+                        Organize
                     </NavItem>
-                    <NavItem eventKey={3}>
-                        <SimpleLink to={`/reviews`}>Reviews</SimpleLink>
+                    <NavItem eventKey={3} onClick={() => this.props.history.push('/reviews')}>
+                        Reviews
                     </NavItem>
                 </Nav>
                 <Nav pullRight>
