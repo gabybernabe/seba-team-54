@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { Card, Button, TextField } from 'react-md';
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router-dom';
+import UserService from '../services/UserService';
 
 import { AlertMessage } from './AlertMessage';
 
@@ -23,20 +24,25 @@ class EventForm extends React.Component {
                 end : props.event.end,
                 description : props.event.description,
                 participants: props.event.participants,
-                transport: props.event.transport
+                transport: props.event.transport,
+                organiserID: props.event.organiserID,
+                organiserUsername: props.event.organiserUsername,
+                participantList: props.event.participantList
             };
         } else {
             this.state = {
-            title : '',
-            location : '',
-            start : '',
-            end : '',
-            description : '',
-            participants: '',
-            transport: ''
+                title : '',
+                location : '',
+                start : '',
+                end : '',
+                description : '',
+                participants: '',
+                transport: '',
+                organiserID : '',
+                organiserUsername: '',
+                participantList: ''
             };
         }
-
 
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeLocation = this.handleChangeLocation.bind(this);
@@ -92,6 +98,9 @@ class EventForm extends React.Component {
         event.description = this.state.description;
         event.participants = this.state.participants;
         event.transport = this.state.transport;
+        event.organiserID = UserService.getCurrentUser().id;
+        event.organiserUsername = UserService.getCurrentUser().username;
+        event.participantList = this.state.participantList;
 
         this.props.onSubmit(event);
     }
