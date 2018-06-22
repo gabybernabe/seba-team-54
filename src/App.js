@@ -11,6 +11,7 @@ import UserLoginView from "./views/UserLoginView";
 import UserSignupView from "./views/UserSignupView";
 
 import UserService from "./services/UserService";
+import {BlogListView} from "./views/BlogListView";
 
 
 class App extends React.Component {
@@ -35,6 +36,7 @@ class App extends React.Component {
                         else {
                             return (<Redirect to={'/login'}/>)
                         }} , path: '/edit/:id'},
+                { component: BlogListView , path: '/blog', exact: true},
                 { component: Reviews , path: '/reviews', exact: true},
                 { component: UserLoginView, path: '/login'},
                 { component: UserSignupView, path: '/register'}
