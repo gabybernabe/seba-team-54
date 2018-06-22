@@ -1,7 +1,7 @@
 "use strict";
 
 import React from 'react';
-import { Card, Button, FontIcon, TextField } from 'react-md';
+import { Card, Button, TextField } from 'react-md';
 import { withRouter } from 'react-router-dom'
 
 import { AlertMessage } from './AlertMessage';
@@ -15,7 +15,18 @@ class EventForm extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
+        if (this.props.event != undefined) {
+            this.state = {
+                title : props.event.title,
+                location : props.event.location,
+                start : props.event.start,
+                end : props.event.end,
+                description : props.event.description,
+                participants: props.event.participants,
+                transport: props.event.transport
+            };
+        } else {
+            this.state = {
             title : '',
             location : '',
             start : '',
@@ -23,7 +34,9 @@ class EventForm extends React.Component {
             description : '',
             participants: '',
             transport: ''
-        };
+            };
+        }
+
 
         this.handleChangeTitle = this.handleChangeTitle.bind(this);
         this.handleChangeLocation = this.handleChangeLocation.bind(this);
@@ -32,6 +45,7 @@ class EventForm extends React.Component {
         this.handleChangeDescription = this.handleChangeDescription.bind(this);
         this.handleChangeParticipants = this.handleChangeParticipants.bind(this);
         this.handleChangeTransport = this.handleChangeTransport.bind(this);
+
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 

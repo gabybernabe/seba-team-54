@@ -1,3 +1,5 @@
+"use strict";
+
 import React, { Component} from 'react';
 
 import EventForm from './../components/EventForm';
@@ -12,20 +14,50 @@ class EventFormView extends Component {
     }
 
     componentWillMount(){
-        this.setState({
-            loading: false,
-            event: undefined,
-            error: undefined
-        });
+        if (this.props.history.location.pathname == '/organize'){
+            this.setState({
+                loading: false,
+                event: undefined,
+                error: undefined
+            });
+        }
+        else {
+            this.setState({
+                loading: true,
+                error: undefined
+            });
+
+            let id = this.props.match.params.id;
+
+            EventService.getEvent(id).then((data) => {
+                this.setState({
+                    event: data,
+                    loading: false,
+                    error: undefined
+                });
+            }).catch((e) => {
+                console.error(e);
+            });
+        }
+
     }
 
     updateEvent(event) {
-        EventService.createEvent(event).then((data) => {
-            this.props.history.push('/');
-        }).catch((e) => {
-            console.error(e);
-            this.setState(Object.assign({}, this.state, {error: 'Error while creating event'}));
-        });
+        if(this.state.event == undefined) {
+            EventService.createEvent(event).then((data) => {
+                this.props.history.push('/');
+            }).catch((e) => {
+                console.error(e);
+                this.setState(Object.assign({}, this.state, {error: 'Error while creating event'}));
+            });
+        } else {
+            EventService.updateEvent(event).then((data) => {
+                this.props.history.goBack();
+            }).catch((e) => {
+                console.error(e);
+                this.setState(Object.assign({}, this.state, {error: 'Error while updating event'}));
+            });
+        }
     }
 
     render() {
