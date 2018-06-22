@@ -52,6 +52,7 @@ export default class UserService {
     }
 
     static isAuthenticated() {
+        console.log("start isAuthenticated");
         return !!window.localStorage['jwtToken'];
     }
 }

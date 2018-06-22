@@ -5,6 +5,8 @@ import EventListView from "./views/EventListView"
 import EventDetailView from "./views/EventDetailView";
 import EventFormView from "./views/EventFormView";
 import Reviews from "./views/Reviews";
+import UserLoginView from "./views/UserLoginView";
+import UserSignupView from "./views/UserSignupView";
 
 import UserService from "./services/UserService";
 
@@ -26,7 +28,9 @@ class App extends React.Component {
                             return (<EventFormView {... props} />)
                             // TODO return (<Redirect to={'/login'}/>)
                         }} , path: '/edit/:id'},
-                { component: Reviews , path: '/reviews', exact: true}
+                { component: Reviews , path: '/reviews', exact: true},
+                { component: UserLoginView, path: '/login'},
+                { component: UserSignupView, path: '/register'}
             ]
         };
     }
