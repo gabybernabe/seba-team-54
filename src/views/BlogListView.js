@@ -27,17 +27,16 @@ export class BlogListView extends React.Component {
         const url = "https://facebook.com"
         const shareText = 'Check this out'
         const shareStyle = {display:"inline-block", margin:'5px'}
+        const h4Style = {display:"inline-block" ,padding:"0 16px"}
+        const h3Style = {marginBottom:"0px",color:"maroon" ,padding:"0 16px"}
 
         return (
-
 
             <Page>
             <Card style={{width:'90%', margin:'0 5%'}}>
                 <CardTitle title="FIRST BLOG POST"/>
-                <div style={{display:"block"}}>
-                    <h4>07/04/2018</h4>
-                    <h4 style={{textAlign:'right'}}>Matthieu Picard</h4>
-                </div>
+                <h3 style={h3Style}>Matthieu Picard</h3>
+                <h4 style={h4Style}>07/04/2018</h4>
                 <Card style={{width:'102%', marginLeft:'-1%'}}>
                 <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
                      style={{width:'100%', objectFit:'cover', maxHeight:'400px'}}/>
