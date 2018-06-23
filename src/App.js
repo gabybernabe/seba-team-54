@@ -5,6 +5,10 @@ import EventListView from "./views/EventListView"
 import EventDetailView from "./views/EventDetailView";
 import EventFormView from "./views/EventFormView";
 import Reviews from "./views/Reviews";
+import UserLoginView from "./views/UserLoginView";
+import UserSignupView from "./views/UserSignupView";
+
+import UserService from "./services/UserService";
 
 
 class App extends React.Component {
@@ -16,7 +20,17 @@ class App extends React.Component {
                 { component: EventListView , path: '/', exact: true},
                 { component: EventDetailView , path: '/participate/:id'},
                 { component: EventFormView , path: '/organize', exact: true},
-                { component: Reviews , path: '/reviews', exact: true}
+                { render: (props) => {
+                        if(UserService.isAuthenticated()) {
+                            return (<EventFormView {... props} />)
+                        }
+                        else {
+                            return (<EventFormView {... props} />)
+                            // TODO return (<Redirect to={'/login'}/>)
+                        }} , path: '/edit/:id'},
+                { component: Reviews , path: '/reviews', exact: true},
+                { component: UserLoginView, path: '/login'},
+                { component: UserSignupView, path: '/register'}
             ]
         };
     }

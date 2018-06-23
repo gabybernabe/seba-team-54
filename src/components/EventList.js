@@ -5,17 +5,20 @@ import { DataTable, TableHeader, TableBody, TableRow, TableColumn, Button } from
 
 import { EventListRow } from './EventListRow';
 
-export const EventList = ({data}) => (
+export const EventList = ({data, onDelete}) => (
         <DataTable plain>
             <TableHeader>
                 <TableRow>
                     <TableColumn>Name</TableColumn>
+                    <TableColumn>Organizer</TableColumn>
                     <TableColumn>Description</TableColumn>
                     <TableColumn>Start</TableColumn>
+                    <TableColumn>Edit</TableColumn>
+                    <TableColumn>Delete</TableColumn>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {data.map((event, i) => <EventListRow key={i} event={event}/>)}
+                {data.map((event, i) => <EventListRow key={i} event={event} onDelete={(id) => onDelete(id)}/>)}
             </TableBody>
         </DataTable>
 );
