@@ -3,27 +3,22 @@ import styled from 'styled-components';
 import {Link, withRouter} from 'react-router-dom';
 
 const DivHeader = styled.div`
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: -8px;
-    margin-top: -10px;
-    margin-left: -10px;
+
     background-color: #f8f8f8;
     border-color: #e7e7e7;
     border-radius: 4px;
+    min-height: 2em;
 `;
 
 const NavBar =styled.nav`
     position: relative;
-    min-height: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 2em;
     border: 1px solid transparent;    
 `;
 
-const WebSiteName = styled.a `
+const WebSiteName = styled.ul `
     float: left;
-    height: 50px;
-    padding: 15px 15px;
+    height: auto;
     font-size: 18px;
     line-height: 20px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
@@ -209,7 +204,7 @@ class Header extends React.Component {
                             <InputSearch type="text" className="form-control" placeholder="Search" name="search"/>
                             <DivSearchButton>
                                 <SearchButton  type="submit">
-                                    <i class="material-icons">search</i>
+                                    <i className="material-icons">search</i>
                                 </SearchButton>
                             </DivSearchButton>
                         </DivSearchBar>

@@ -2,43 +2,35 @@ import React from 'react';
 
 import EventService from '../services/EventService';
 import { EventList } from '../components/EventList';
-
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Card, CardTitle, CardText } from 'react-md';
 import Page from '../components/Page'
-
-const Title = styled.label`
-    padding: 15px 15px;
-    font-size: 24px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-
-`;
+import { EventListRow } from '../components/EventListRow';
+import {EventCard} from "../components/EventCard";
 
 const DivLevel = styled.div`
     position: relative;
     box-sizing: border-box;
     display: flex;
-    margin-top: 40px;
-    height:34px;
+    margin-top: 4em;
 `;
 const Text = styled.label`
-    padding: 15px 45px;
+    padding: 0em 0em 0em 3em;
     font-size: 16px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    width: 30%;
 `;
 
 const LevelButton = styled.select`
     color: #333;
+    height:2em;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #dfdfdf;
     border-color: #ccc;
-    padding: 8px 12px;
+    padding: 0em 2em 0em 2em;
     margin-bottom: 0;
-    font-size: 12px;
+    font-size: auto;
     font-weight: 400;
     text-align: center;
     white-space: nowrap;
@@ -49,9 +41,10 @@ const LevelButton = styled.select`
     border-radius: 4px;
     text-transform: none;
     overflow: visible;
-    margin: 0;
+    margin-left: 2em;
     font: inherit;
     box-sizing: border-box;
+
 `;
 
 const LevelList =styled.option`
@@ -62,8 +55,8 @@ const LevelList =styled.option`
     z-index: 1000;
     float: left;
     min-width: 160px;
-    padding: 5px 0;
-    margin: 2px 0 0;
+    padding: 1em 0em;
+    margin: 2em 0em 0em;
     font-size: 14px;
     text-align: left;
     list-style: none;
@@ -72,36 +65,11 @@ const LevelList =styled.option`
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;   
 `;
 const Picker = styled.div`
-    width: 50%;
-    padding: 8px 10px 5px;
+    padding: 0em 4em 1em;
     vertical-align: baseline;
-    display: block;
-    display: flex;
+    display: inline-block;
 `;
 
-const HomeButton = styled.button`
-    color: #fff;
-    background-color: #337ab7;
-    border-color: #2e6da4;
-    display: inline-block;
-    padding: 6px 12px;
-    margin-bottom: 10px;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    touch-action: manipulation;
-    cursor: pointer;
-    user-select: none;
-    border: 1px solid transparent;
-    border-radius: 4px;
-    font-family: inherit;
-    overflow: visible;
-    box-sizing: border-box;
-    margin-left:70%;
-`;
 
 class EventListView extends React.Component {
 
@@ -110,7 +78,7 @@ class EventListView extends React.Component {
         this.state = {
             loading: false,
             data: [],
-            date: ''
+            date: moment()
         };
         this.dateChanged = this.dateChanged.bind(this);
     }
@@ -121,6 +89,7 @@ class EventListView extends React.Component {
         });
 
         EventService.getEvents().then((data) => {
+            console.log(data);
             this.setState({
                 data: [...data],
                 loading: false
@@ -141,64 +110,30 @@ class EventListView extends React.Component {
 
         return (
             <Page>
-            <div style={{backgroundColor:'white'}}>
-                <Title>Find an available hike</Title>
-
-                <DivLevel>
-                    <Text>Select the level of experience:</Text>
-                    <LevelButton  id="level">
-                        <LevelList>Easy</LevelList>
-                        <LevelList>Medium</LevelList>
-                        <LevelList>Hard</LevelList>
-                        <LevelList>Expert</LevelList>
-                    </LevelButton>
-                    <Text style={{marginLeft:'10%'}}>Select a Date for the hike:</Text>
-                   <Picker>
-                    <DatePicker style={{borderRadius:'4px'}} selected={this.state.date}
+            <div style={{backgroundColor:'white', width:'100%', minWidth:'300px'}}>
+                <h1>Find an available hike: </h1>
+                <DivLevel  style={{wordBreak: 'break-all'}}>
+                    <div  style={{wordBreak: 'break-all'}}>
+                        <Text>Select the level of experience:</Text>
+                        <LevelButton  id="level">
+                            <LevelList>Easy</LevelList>
+                            <LevelList>Medium</LevelList>
+                            <LevelList>Hard</LevelList>
+                            <LevelList>Expert</LevelList>
+                        </LevelButton>
+                    </div>
+                    <div  style={{wordBreak: 'break-all'}}>
+                        <Text>Select a Date for the hike:</Text>
+                        <Picker>
+                            <DatePicker style={{borderRadius:'4px'}} selected={this.state.date}
                                 onChange={this.dateChanged}  />
-                   </Picker>
+                        </Picker>
+                    </div>
                 </DivLevel>
                 <br></br>
-                <div style={{marginTop:'2.9%', display:'flex', marginLeft:'30px'}} >
-                    <Card style ={{width:'23.333%', marginLeft:'50px', marginRight:'50px'}}>
-                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
-                             style={{width:'100%'}}/>
-                        <CardTitle title="Hike1 " subtitle="Munich" />
-                        <CardText>
-                            <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
-                                crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
-                                lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
-                                pack your backpack and head up onto a mountain!</p>
-                            <HomeButton>More Info</HomeButton>
-                        </CardText>
-                    </Card>
-                    <Card style ={{width:'23.333%',  marginLeft:'50px', marginRight:'50px'} }>
-                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
-                             style={{width:'100%'}}/>
-                        <CardTitle title="Hike2 " subtitle="Munich" />
-                        <CardText>
-                            <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
-                                crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
-                                lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
-                                pack your backpack and head up onto a mountain!</p>
-                            <HomeButton>More Info</HomeButton>
-                        </CardText>
-                    </Card>
-                    <Card style ={{width:'23.333%',  marginLeft:'50px'} }>
-                        <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
-                             style={{width:'100%'}}/>
-                        <CardTitle title="Hike3 " subtitle="Munich" />
-                        <CardText>
-                            <p style={{fontSize:'12px', marginLeft:'20px', marginRight:'20px', textAlign:'justify'}}>If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
-                                crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
-                                lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
-                                pack your backpack and head up onto a mountain!</p>
-                            <HomeButton>More Info</HomeButton>
-                        </CardText>
-                    </Card>
-
+                <div style={{marginTop:'3em', display:'flex', marginLeft:'3em'}} >
+                    {this.state.data.map((event, i) => <EventCard key={i} event={event}/>)}
                 </div>
-                <EventList data={this.state.data}/>
             </div>
             </Page>
         );
