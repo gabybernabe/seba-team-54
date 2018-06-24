@@ -62,10 +62,11 @@
     "react-slick": "^0.23.1",
     "react-styled-components": "^0.1.11",
     "reactjs-popup": "^1.1.1",
+    "redux-form": "^7.4.2",
     "semantic-ui-react": "^0.81.1",
     "slick-carousel": "^1.8.1",
     "styled": "^1.0.0",
-    "styled-components": "^3.3.2",
+    "styled-components": "^3.3.3",
     "webfontloader": "^1.6.28",
     "yarn": "^1.7.0"
   }
