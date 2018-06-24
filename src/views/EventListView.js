@@ -152,7 +152,7 @@ class EventListView extends React.Component {
                 <br></br>
 
                 <Grid style={{marginTop:'3em'}} >
-                    
+
                     {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
                 </Grid>
                 <EventList data={this.state.data} onDelete={(id) => this.deleteEvent(id)}/>

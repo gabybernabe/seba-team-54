@@ -58,7 +58,9 @@ export class EventCard extends React.Component {
                 <CardText style={{style}}>{this.props.event.description}</CardText>
                 <CardText style={{style}}>{this.props.event.start}</CardText>
                 <CardText style={{style}}>{this.props.event.transport}</CardText>
-                <Participate >Participate</Participate>
+                <Participate>
+                    <Link style={{color:'white'}} to={`/participate/${this.props.event._id}`}>{'Join'}</Link>
+                </Participate>
                 <Grid>
                     <Cell size={6}>
                         {UserService.isAuthenticated() ?
