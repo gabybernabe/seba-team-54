@@ -25,8 +25,7 @@ class App extends React.Component {
                             return (<EventFormView {... props} />)
                         }
                         else {
-                            return (<EventFormView {... props} />)
-                            // TODO return (<Redirect to={'/login'}/>)
+                            return (<Redirect to={'/login'}/>)
                         }} , path: '/edit/:id'},
                 { component: Reviews , path: '/reviews', exact: true},
                 { component: UserLoginView, path: '/login'},
