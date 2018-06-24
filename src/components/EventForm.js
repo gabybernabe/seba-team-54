@@ -22,6 +22,7 @@ class EventForm extends React.Component {
                 location : props.event.location,
                 start : props.event.start,
                 end : props.event.end,
+                level: props.event.level,
                 description : props.event.description,
                 participants: props.event.participants,
                 transport: props.event.transport,
@@ -35,6 +36,7 @@ class EventForm extends React.Component {
                 location : '',
                 start : '',
                 end : '',
+                level : '',
                 description : '',
                 participants: '',
                 transport: '',
@@ -48,6 +50,7 @@ class EventForm extends React.Component {
         this.handleChangeLocation = this.handleChangeLocation.bind(this);
         this.handleChangeStart = this.handleChangeStart.bind(this);
         this.handleChangeEnd = this.handleChangeEnd.bind(this);
+        this.handleChangeLevel = this.handleChangeLevel.bind(this);
         this.handleChangeDescription = this.handleChangeDescription.bind(this);
         this.handleChangeParticipants = this.handleChangeParticipants.bind(this);
         this.handleChangeTransport = this.handleChangeTransport.bind(this);
@@ -69,6 +72,10 @@ class EventForm extends React.Component {
 
     handleChangeEnd(value) {
         this.setState(Object.assign({}, this.state, {end: value}));
+    }
+
+    handleChangeLevel(value) {
+        this.setState(Object.assign({}, this.state, {level: value}));
     }
 
     handleChangeDescription(value) {
@@ -95,6 +102,7 @@ class EventForm extends React.Component {
         event.location = this.state.location;
         event.start = this.state.start;
         event.end = this.state.end;
+        event.level = this.state.level;
         event.description = this.state.description;
         event.participants = this.state.participants;
         event.transport = this.state.transport;
@@ -108,7 +116,6 @@ class EventForm extends React.Component {
 
     render() {
         return (
-
                 <Card style={style} className="md-block-centered">
                     <form className="md-grid" onSubmit={this.handleSubmit} onReset={() => this.props.history.goBack()}>
                         <TextField
@@ -147,6 +154,15 @@ class EventForm extends React.Component {
                             value={this.state.end}
                             onChange={this.handleChangeEnd}
                             errorText="Date is required"/>
+                        <select>
+                            label="Level"
+                            id="LevelField"
+                            <option selected value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                            value={this.state.level}
+                            onChange={this.handleChangeLevel}
+                        </select>
                         <TextField
                             label="Description"
                             id="DescriptionField"
