@@ -4,6 +4,7 @@ import React, { Component} from 'react';
 
 import EventForm from './../components/EventForm';
 import EventService from '../services/EventService';
+import {PageHeader} from 'react-bootstrap';
 
 import Page from '../components/Page';
 
@@ -67,7 +68,11 @@ class EventFormView extends Component {
 
         return (
             <Page>
-                <h1>Organize a hike</h1>
+                <div class="container">
+                    <PageHeader>
+                        Organize a hike
+                    </PageHeader>
+                </div>
                 <EventForm event={this.state.event} onSubmit={(event) => this.updateEvent(event)} error={this.state.error} />
             </Page>
         );

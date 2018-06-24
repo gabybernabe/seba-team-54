@@ -4,6 +4,7 @@ import EventService from '../services/EventService';
 import { EventList } from '../components/EventList';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
+import {Row, Col, PageHeader} from 'react-bootstrap';
 import {Grid, Cell} from 'react-md';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -129,34 +130,33 @@ class EventListView extends React.Component {
 
         return (
             <Page>
-            <div style={{backgroundColor:'white', width:'100%', minWidth:'300px'}}>
-                <h1>Find an available hike: </h1>
-                <DivLevel  style={{wordBreak: 'break-all'}}>
-                    <div  style={{wordBreak: 'break-all'}}>
-                        <Text>Select the level of experience:</Text>
-                        <LevelButton  id="level">
-                            <LevelList>Easy</LevelList>
-                            <LevelList>Medium</LevelList>
-                            <LevelList>Hard</LevelList>
-                            <LevelList>Expert</LevelList>
-                        </LevelButton>
-                    </div>
-                    <div  style={{wordBreak: 'break-all'}}>
-                        <Text>Select a Date for the hike:</Text>
-                        <Picker>
-                            <DatePicker style={{borderRadius:'4px'}} selected={this.state.date}
-                                onChange={this.dateChanged}  />
-                        </Picker>
-                    </div>
-                </DivLevel>
-                <br></br>
+                <div className="container">
+                    <PageHeader>Find a hike</PageHeader>
+                    <DivLevel  style={{wordBreak: 'break-all'}}>
+                        <div  style={{wordBreak: 'break-all'}}>
+                            <Text>Level:</Text>
+                            <LevelButton  id="level">
+                                <LevelList>Easy</LevelList>
+                                <LevelList>Medium</LevelList>
+                                <LevelList>Hard</LevelList>
+                                <LevelList>Expert</LevelList>
+                            </LevelButton>
+                        </div>
+                        <div  style={{wordBreak: 'break-all'}}>
+                            <Text>Date:</Text>
+                            <Picker>
+                                <DatePicker style={{borderRadius:'4px'}} selected={this.state.date}
+                                            onChange={this.dateChanged}  />
+                            </Picker>
+                        </div>
+                    </DivLevel>
+                </div>
 
-                <Grid style={{marginTop:'3em'}} >
-
-                    {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
-                </Grid>
-                <EventList data={this.state.data} onDelete={(id) => this.deleteEvent(id)}/>
-            </div>
+                <div className="container">
+                    <Grid>
+                        {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
+                    </Grid>
+                </div>
             </Page>
         );
     }
