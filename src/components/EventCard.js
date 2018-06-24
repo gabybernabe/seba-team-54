@@ -2,8 +2,12 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Card, CardTitle, CardText } from 'react-md';
+import { Card, CardTitle, CardText, TableFooter,Grid, Cell } from 'react-md';
 import { SimpleLink } from './SimpleLink';
+import UserService from "../services/UserService";
+import { TableRow, TableColumn, FontIcon, Button } from 'react-md';
+import { Link } from 'react-router-dom';
+
 
 const Participate = styled.button`
     color: #fff;
@@ -26,6 +30,8 @@ const Participate = styled.button`
     overflow: visible;
     box-sizing: border-box;
     break-word: break-all;
+    column-count: 3;
+column-gap: 20px;
 `;
 
 const style = { textAlign:'justify', wordWrap:'break-word',  wordBreak: 'break-all' };
@@ -39,7 +45,7 @@ export class EventCard extends React.Component {
     render() {
 
         return (
-            <Card style ={{width:'23.333%', marginLeft:'5%', marginRight:'5%', fontSize:'auto', boxSizing:'border-box', wordBreak: 'break-all'}} key={this.props.children}>
+            <Card style ={{width:'100%', fontSize:'auto', boxSizing:'border-box', wordBreak: 'break-all'}} key={this.props.children}>
                 <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
                      style={{width:'100%'}}/>
                 <CardTitle title={
@@ -53,6 +59,21 @@ export class EventCard extends React.Component {
                 <CardText style={{style}}>{this.props.event.start}</CardText>
                 <CardText style={{style}}>{this.props.event.transport}</CardText>
                 <Participate >Participate</Participate>
+                <Grid>
+                    <Cell size={6}>
+                        {UserService.isAuthenticated() ?
+                            <Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link>
+                            : <Link to={'/login'}><FontIcon>mode_edit</FontIcon></Link>
+                        }
+                        </Cell>
+                    <Cell size={6} style={{textAlign:'right'}}>
+                        {UserService.isAuthenticated() ?
+                            <Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button>
+                            : <Link to={'/login'}><FontIcon>delete</FontIcon></Link>
+                        }
+                    </Cell>
+                </Grid>
+
             </Card>
         );
     }

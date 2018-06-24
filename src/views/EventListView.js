@@ -4,10 +4,10 @@ import EventService from '../services/EventService';
 import { EventList } from '../components/EventList';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
+import {Grid, Cell} from 'react-md';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import Page from '../components/Page'
-import { EventListRow } from '../components/EventListRow';
+import Page from '../components/Page';
 import {EventCard} from "../components/EventCard";
 
 const DivLevel = styled.div`
@@ -150,9 +150,11 @@ class EventListView extends React.Component {
                     </div>
                 </DivLevel>
                 <br></br>
-                <div style={{marginTop:'3em', display:'flex', marginLeft:'3em'}} >
-                    {this.state.data.map((event, i) => <EventCard key={i} event={event}/>)}
-                </div>
+
+                <Grid style={{marginTop:'3em'}} >
+                    
+                    {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
+                </Grid>
                 <EventList data={this.state.data} onDelete={(id) => this.deleteEvent(id)}/>
             </div>
             </Page>
