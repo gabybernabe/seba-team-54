@@ -63,13 +63,13 @@ export class EventCard extends React.Component {
                     <Cell size={6}>
                         {UserService.isAuthenticated() ?
                             <Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link>
-                            : <Link to={'/login'}><FontIcon>mode_edit</FontIcon></Link>
+                            : <div></div>
                         }
                         </Cell>
                     <Cell size={6} style={{textAlign:'right'}}>
                         {UserService.isAuthenticated() ?
                             <Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button>
-                            : <Link to={'/login'}><FontIcon>delete</FontIcon></Link>
+                            : <div></div>
                         }
                     </Cell>
                 </Grid>
