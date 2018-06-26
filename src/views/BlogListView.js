@@ -7,6 +7,7 @@ import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Card, CardTitle, CardText } from 'react-md';
 import Page from '../components/Page'
+import {WriteButton, EditButton, DeleteButton} from "../components/BlogPostButtons"
 
 import {FacebookShareButton,
         FacebookIcon,
@@ -16,6 +17,10 @@ import {FacebookShareButton,
         LinkedinIcon,
         TwitterShareButton,
         TwitterIcon} from 'react-share';
+
+import Button from "@material-ui/core/es/Button/Button";
+import AddIcon from '@material-ui/icons/Add';
+
 
 export class BlogListView extends React.Component {
 
@@ -27,44 +32,50 @@ export class BlogListView extends React.Component {
         const url = "https://facebook.com"
         const shareText = 'Check this out'
         const shareStyle = {display:"inline-block", margin:'5px'}
-        const h4Style = {display:"inline-block" ,padding:"0 16px"}
-        const h3Style = {marginBottom:"0px",color:"maroon" ,padding:"0 16px"}
+        const h4Style = {marginBottom:"0px",color:"maroon"}
+        const h5Style = {display:"inline-block"}
+        const styleImg = {width:'35%', margin:'0 0 1px 2%', height:"100%", display:"table-cell"}
+        const stylePostTitle = {width:"80%"}
+        const styleListItem = {width:'90%', margin:'0 5%', overflow:"hidden", display:"table"}
 
         return (
 
             <Page>
-            <Card style={{width:'90%', margin:'0 5%'}}>
-                <CardTitle title="FIRST BLOG POST"/>
-                <h3 style={h3Style}>Matthieu Picard</h3>
-                <h4 style={h4Style}>07/04/2018</h4>
-                <Card style={{width:'102%', marginLeft:'-1%'}}>
-                <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
-                     style={{width:'100%', objectFit:'cover', maxHeight:'400px'}}/>
+                <div style={{margin:"5%"}}>
+                    <WriteButton/>
+                    <h1 style={{margin:"20px 0"}}> BLOG </h1>
+                </div>
+
+
+            <Card style={styleListItem}>
+                <Card style={styleImg}>
+                    <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
+                         style={{width:'100%', objectFit:'cover', height:'100%'}}/>
                 </Card>
-                <CardText>
+                <div className="postTitle" style={stylePostTitle}>
+                    <div style={{display:"inline-block",float:"right", textAlign:"right", paddingTop:"24px"}}>
+                        <h4 style={h4Style}>Matthieu Picard</h4>
+                        <h5 style={h5Style}>07/04/2018</h5>
+                    </div>
+                    <CardTitle style={{display:"inline-block"}} title="FIRST BLOG POST"/>
+                </div>
+                <CardText style={{width:"65%"}}>
                     <p> <b>Lorem Ipsum is awesome</b></p>
                     <p>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut rutrum elementum tortor quis mattis. Fusce ac mi aliquam, volutpat nulla id,
-                        pellentesque lacus. Quisque vel dolor ipsum. Donec non ante ex. Nulla interdum quis nisl mattis molestie. Cras vestibulum nisi a nisl
-                        vulputate maximus. Proin eleifend tempor est eget cursus. Aliquam erat volutpat. Ut mollis, orci sit amet auctor iaculis, nunc lectus
-                        euismod tortor, id fringilla leo velit eu neque. Aliquam libero eros, semper ut justo eu, egestas porttitor arcu. Nullam est libero,
-                        ullamcorper et condimentum a, egestas qui:ws mi. Proin iaculis vel mauris quis iaculis. Vivamus ac aliquam nibh. Nullam quis est tellus.
+                        pellentesque lacus. Quisque vel dolor ipsum. Donec non ante ex.
                     </p>
                     <FacebookShareButton style={shareStyle} url={url}>
-                        <FacebookIcon
-                            size={32} round />
+                        <FacebookIcon size={32} round />
                     </FacebookShareButton>
                     <TwitterShareButton style={shareStyle} url={url}>
-                        <TwitterIcon
-                            size={32} round />
+                        <TwitterIcon size={32} round />
                     </TwitterShareButton>
                     <LinkedinShareButton style={shareStyle} url={url}>
-                        <LinkedinIcon
-                            size={32} round />
+                        <LinkedinIcon size={32} round />
                     </LinkedinShareButton>
                     <GooglePlusShareButton style={shareStyle} url={url}>
-                        <GooglePlusIcon
-                            size={32} round />
+                        <GooglePlusIcon size={32} round />
                     </GooglePlusShareButton>
 
                 </CardText>
