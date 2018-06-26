@@ -3,6 +3,7 @@ import React from 'react';
 import { EventDetail } from '../components/EventDetail';
 
 import EventService from '../services/EventService';
+import UserService from '../services/UserService';
 
 class EventDetailView extends React.Component {
 
@@ -28,13 +29,17 @@ class EventDetailView extends React.Component {
 
     }
 
+    participateEvent(id){
+        EventService.participateEvent(id,UserService.getCurrentUser().username);
+    }
+
     render() {
         if (this.state.loading) {
             return (<h2>Loading...</h2>);
         }
 
         return (
-            <EventDetail event={this.state.event}/>
+            <EventDetail event={this.state.event} onParticipate={(id) => this.participateEvent(id)}/>
         );
     }
 }

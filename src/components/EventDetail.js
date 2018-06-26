@@ -1,11 +1,15 @@
 "use strict";
 
 import React from 'react';
-import { Card, CardTitle, CardText} from 'react-md';
+import { Card, CardTitle, CardText, Button} from 'react-md';
 
 import Page from './Page';
 import styled from "styled-components";
 import Slider from "react-slick";
+
+import UserService from "../services/UserService";
+import EventService from "../services/EventService";
+
 
 const style = { maxWidth: 500 };
 
@@ -48,6 +52,31 @@ const HomeButton = styled.button`
     margin-left:70%;
 `;
 
+const Participate = styled.button`
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-left:1em;
+    font-size: auto;
+    font-weight: 300;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-family: inherit;
+    overflow: visible;
+    box-sizing: border-box;
+    break-word: break-all;
+    column-count: 3;
+column-gap: 20px;
+`;
+
 export class EventDetail extends React.Component {
 
     constructor(props) {
@@ -80,6 +109,18 @@ export class EventDetail extends React.Component {
                         <p>
                             level: {this.props.event.level}
                         </p>
+                        <p>
+                            list of participants: {this.props.event.participantList}
+                        </p>
+                        {EventService.isParticipating(this.props.event.participantList,UserService.getCurrentUser().username) ?
+                            <Button raised disable={true}>
+                                Already participating
+                            </Button>
+                        :
+                            <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
+                                Participate
+                            </Button>
+                        }
                     </CardText>
                 </Card>
 
