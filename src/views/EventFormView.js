@@ -68,7 +68,7 @@ class EventFormView extends Component {
 
         return (
             <Page>
-                <div class="container">
+                <div className="container">
                     <PageHeader>
                         Organize a hike
                     </PageHeader>

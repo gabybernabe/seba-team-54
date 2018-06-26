@@ -72,10 +72,13 @@ export class EventDetail extends React.Component {
 
                     <CardText>
                         <p>
-                            {this.props.event.location}
+                            departure: {this.props.event.location}
                         </p>
                         <p>
-                            {this.props.event.participants}
+                            participants: {this.props.event.participants}
+                        </p>
+                        <p>
+                            level: {this.props.event.level}
                         </p>
                     </CardText>
                 </Card>

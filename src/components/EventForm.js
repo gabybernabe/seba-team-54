@@ -154,15 +154,14 @@ class EventForm extends React.Component {
                             value={this.state.end}
                             onChange={this.handleChangeEnd}
                             errorText="Date is required"/>
-                        <select>
+                        <TextField
                             label="Level"
                             id="LevelField"
-                            <option selected value="easy">Easy</option>
-                            <option value="medium">Medium</option>
-                            <option value="hard">Hard</option>
+                            type="text"
+                            className="md-row"
+                            required={false}
                             value={this.state.level}
-                            onChange={this.handleChangeLevel}
-                        </select>
+                            onChange={this.handleChangeLevel}/>
                         <TextField
                             label="Description"
                             id="DescriptionField"
