@@ -59,21 +59,6 @@ export class EventCard extends React.Component {
                 <Participate>
                     <Link style={{color:'white'}} to={`/participate/${this.props.event._id}`}>{'Join'}</Link>
                 </Participate>
-                <Grid>
-                    <Cell size={6}>
-                        {UserService.isAuthenticated() ?
-                            <Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link>
-                            : <div></div>
-                        }
-                        </Cell>
-                    <Cell size={6} style={{textAlign:'right'}}>
-                        {UserService.isAuthenticated() ?
-                            <Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button>
-                            : <div></div>
-                        }
-                    </Cell>
-                </Grid>
-
             </Card>
         );
     }
