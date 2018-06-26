@@ -108,7 +108,7 @@ class EventForm extends React.Component {
         event.transport = this.state.transport;
         event.organiserID = UserService.getCurrentUser().id;
         event.organiserUsername = UserService.getCurrentUser().username;
-        event.participantList = this.state.participantList;
+        event.participantList = UserService.getCurrentUser().username;
 
         this.props.onSubmit(event);
     }

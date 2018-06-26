@@ -83,6 +83,10 @@ export class EventDetail extends React.Component {
         super(props);
     }
 
+    prettifyParticipantList(list){
+        return this.props.event.participantList.toString()
+    }
+
     render() {
         const settings = {
             dots: true,
@@ -96,6 +100,7 @@ export class EventDetail extends React.Component {
 
         return (
             <Page>
+                <h1>Find an available hike</h1>
                 <Card style={style} className="md-block-centered">
                     <CardTitle title={this.props.event.title} subtitle={this.props.event.description} />
 
@@ -110,10 +115,10 @@ export class EventDetail extends React.Component {
                             level: {this.props.event.level}
                         </p>
                         <p>
-                            list of participants: {this.props.event.participantList}
+                            list of participants: {this.prettifyParticipantList(this.props.event.participantList)}
                         </p>
                         {EventService.isParticipating(this.props.event.participantList,UserService.getCurrentUser().username) ?
-                            <Button raised disable={true}>
+                            <Button raised disable="true">
                                 Already participating
                             </Button>
                         :
@@ -125,7 +130,6 @@ export class EventDetail extends React.Component {
                 </Card>
 
                 <div style={{ backgroundColor: 'none' }}>
-                    <h1>Find an available hike</h1>
                     <div style={{ marginTop: '2.9%', width: '100%', height: '100%', display: 'flex', marginLeft: '30px' }} >
                         <Card style={{ width: '50%', height: '40%', marginLeft: '50px', marginRight: '50px' }}>
                             <Slider {...settings}>
