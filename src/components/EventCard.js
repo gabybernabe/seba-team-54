@@ -34,6 +34,15 @@ const Participate = styled.button`
 
 const style = { textAlign:'justify', wordWrap:'break-word',  wordBreak: 'break-all' };
 
+const imageArray= [
+    'https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg',
+    'https://i.pinimg.com/originals/3c/d5/ff/3cd5ff662865c91f8753fc5224e02b44.jpg',
+    'http://1.bp.blogspot.com/-xP2EdSZuo94/VB_cegS6LAI/AAAAAAAAkbg/UphZdGzJ8aQ/s1600/P1040301.jpg',
+    'https://media0.trover.com/T/54fad7a3e9ae42087a003955/fixedw_large_4x.jpg',
+    'https://assets.cicerone.co.uk/filestore/productImages/sampleroutephotos/_w1200_h1200/804_SP0.jpg'
+];
+
+
 export class EventCard extends React.Component {
 
     constructor(props) {
@@ -44,8 +53,8 @@ export class EventCard extends React.Component {
 
         return (
             <Card style ={{width:'100%', fontSize:'auto', boxSizing:'border-box', wordBreak: 'break-all'}} key={this.props.children}>
-                <img src={"https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg"}
-                     style={{width:'100%'}}/>
+                <img src={ imageArray[Math.floor((Math.random() * 5) + 1) - 1]}
+                     style={{width:'100%', maxHeight:'206px'}}/>
                 <CardTitle title={
                     <SimpleLink to={`/participate/${this.props.event._id}`}>{this.props.event.title}</SimpleLink>
                 } subtitle={this.props.event.organiserUsername} style={{style}}>
