@@ -34,7 +34,7 @@ export class BlogListView extends React.Component {
         const shareStyle = {display:"inline-block", margin:'5px'}
         const h4Style = {marginBottom:"0px",color:"maroon"}
         const h5Style = {display:"inline-block"}
-        const styleImg = {width:'35%', margin:'0 0 1px 2%', height:"100%", display:"table-cell"}
+        const styleImg = {width:'35%', margin:'0 0 1px 2%', height:"100%", display:"table-cell", float:"right"}
         const stylePostTitle = {width:"80%"}
         const styleListItem = {width:'90%', margin:'0 5%', overflow:"hidden", display:"table"}
 
