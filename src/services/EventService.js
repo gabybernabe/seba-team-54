@@ -6,9 +6,12 @@ export default class EventService {
 
     static baseURL() {return "http://localhost:3000/events" }
 
-    static getEvents(){
+    static getEvents(level, date){
         return new Promise((resolve, reject) => {
-            HttpService.get(this.baseURL(), function(data) {
+            HttpService.get(this.baseURL() +
+                '?level=' + level +
+                '&date=' + date
+                , function(data) {
                 resolve(data);
             }, function(textStatus) {
                 reject(textStatus);

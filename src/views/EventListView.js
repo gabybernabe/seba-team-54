@@ -79,9 +79,11 @@ class EventListView extends React.Component {
         this.state = {
             loading: false,
             data: [],
-            date: moment()
+            date: moment(),
+            level: 'select'
         };
         this.dateChanged = this.dateChanged.bind(this);
+        this.levelChanged = this.levelChanged.bind(this);
     }
 
     componentWillMount(){
@@ -89,15 +91,28 @@ class EventListView extends React.Component {
             loading: true
         });
 
-        EventService.getEvents().then((data) => {
+        EventService.getEvents('select','date').then((data) => {
             console.log(data);
             this.setState({
                 data: [...data],
                 loading: false
             });
         }).catch((e) => {
-            console.error(e);
+            console.log(e);
         });
+    }
+
+    levelChanged(event){
+        this.setState({level: event.target.value});
+        EventService.getEvents(event.target.value, '').then((data) => {
+            console.log(data);
+            this.setState({
+                data: [...data]
+            });
+        }).catch((e) => {
+            console.log(e);
+        });
+        console.log(event.target.value);
     }
 
     dateChanged(d){
@@ -135,11 +150,12 @@ class EventListView extends React.Component {
                     <DivLevel  style={{wordBreak: 'break-all'}}>
                         <div  style={{wordBreak: 'break-all'}}>
                             <Text>Level:</Text>
-                            <LevelButton  id="level">
-                                <LevelList>Easy</LevelList>
-                                <LevelList>Medium</LevelList>
-                                <LevelList>Hard</LevelList>
-                                <LevelList>Expert</LevelList>
+                            <LevelButton  id="level" onChange={this.levelChanged} >
+                                <LevelList value={'select'}>Select</LevelList>
+                                <LevelList value={'easy'}>Easy</LevelList>
+                                <LevelList value={'medium'} >Medium</LevelList>
+                                <LevelList value={'hard'}>Hard</LevelList>
+                                <LevelList value={'expert'}>Expert</LevelList>
                             </LevelButton>
                         </div>
                         <div  style={{wordBreak: 'break-all'}}>
