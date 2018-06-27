@@ -1,11 +1,17 @@
 "use strict";
 
 import React from 'react';
-import { Card, CardTitle, CardText} from 'react-md';
+import { Card, CardTitle, CardText, Button, FontIcon} from 'react-md';
 
 import Page from './Page';
 import styled from "styled-components";
 import Slider from "react-slick";
+import {Grid, Cell} from 'react-md';
+import { Link } from 'react-router-dom';
+
+import UserService from "../services/UserService";
+import EventService from "../services/EventService";
+
 
 const style = { maxWidth: 500 };
 
@@ -48,10 +54,39 @@ const HomeButton = styled.button`
     margin-left:70%;
 `;
 
+const Participate = styled.button`
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+    display: inline-block;
+    margin-bottom: 1em;
+    margin-left:1em;
+    font-size: auto;
+    font-weight: 300;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-family: inherit;
+    overflow: visible;
+    box-sizing: border-box;
+    break-word: break-all;
+    column-count: 3;
+column-gap: 20px;
+`;
+
 export class EventDetail extends React.Component {
 
     constructor(props) {
         super(props);
+    }
+
+    prettifyParticipantList(list){
+        return this.props.event.participantList.toString()
     }
 
     render() {
@@ -66,85 +101,48 @@ export class EventDetail extends React.Component {
         };
 
         return (
-            <Page>
-                <Card style={style} className="md-block-centered">
-                    <CardTitle title={this.props.event.title} subtitle={this.props.event.description} />
+            <Card style={style} className="md-block-left">
+                <CardTitle title={this.props.event.title} subtitle={this.props.event.description} />
 
-                    <CardText>
-                        <p>
-                            {this.props.event.location}
-                        </p>
-                        <p>
-                            {this.props.event.participants}
-                        </p>
-                    </CardText>
-                </Card>
+                <CardText>
+                    <p>
+                        departure: {this.props.event.location}
+                    </p>
+                    <p>
+                        participants: {this.props.event.participants}
+                    </p>
+                    <p>
+                        level: {this.props.event.level}
+                    </p>
+                    <p>
+                        list of participants: {this.prettifyParticipantList(this.props.event.participantList)}
+                    </p>
+                    {EventService.isParticipating(this.props.event.participantList,UserService.getCurrentUser().username) ?
+                        <Button raised disable="true">
+                            Already participating
+                        </Button>
+                        :
+                        <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
+                            Participate
+                        </Button>
+                    }
+                </CardText>
 
-                <div style={{ backgroundColor: 'none' }}>
-                    <h1>Find an available hike</h1>
-                    <div style={{ marginTop: '2.9%', width: '100%', height: '100%', display: 'flex', marginLeft: '30px' }} >
-                        <Card style={{ width: '50%', height: '40%', marginLeft: '50px', marginRight: '50px' }}>
-                            <Slider {...settings}>
-                                <div>
-                                    <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" />
-                                </div>
-                                <div>
-                                    <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" />
-                                </div>
-                                <div>
-                                    <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" />
-                                </div>
-                                <div>
-                                    <img src="http://placekitten.com/g/400/200" />
-                                </div>
-                            </Slider>
-                            <CardTitle title="Name of the Hike " subtitle="Garmisch" />
-                            <CardText>
-                            </CardText>
-                        </Card>
-                        <Card style={{ width: '30%', height: '40%', marginLeft: '50px', marginRight: '50px' }}>
-                            <img src={"https://www.outdooractive.com/api/staticmap?i=1044790&size=large&project=outdooractive"}/>
-                            <CardText>
-                                <HomeButton>Watch Route</HomeButton>
-                            </CardText>
-                        </Card>
-                    </div>
-                    <br></br>
-
-                    <DivLevel>
-                        <Text style={{ width: '50%' }}>
-                            <ul>
-                                <li>Tomorrow from 07:30 to 16:00</li>
-                                <li>München Hbf, Platform 27</li>
-                                <li>20/25</li>
-                                <br></br>
-                                <li><h3>Description</h3></li>
-                                <CardText>
-                                    <p style={{ fontSize: '16px', marginLeft: '1px', textAlign: 'justify' }}>
-                                        If you live in Munich, you have mountains and valleys, lush green meadows, torrential ravines,
-                                        crystal- clear streams and blue swimming lakes virtually at your doorstep. The entire experience
-                                        lets you forget your daily cares and thoroughly enjoy life. And so lace up your hiking boots,
-                                        pack your backpack and head up onto a mountain!</p>
-                                    <br></br>
-                                    <HomeButton>Confirm participation</HomeButton>
-                                </CardText>
-                            </ul>
-                        </Text>
-                        <Text style={{ marginLeft: '6%' }}>
-                            <ul>
-                                <li><h3>Route Details</h3></li>
-                                <li>Distance: 10.5 km</li>
-                                <li>Duration: 4 h</li>
-                                <li>Up: 821 m</li>
-                                <li>Down: 600 m</li>
-                                <br></br>
-                                <li><h3>Rating</h3></li>
-                                <li>3.4/5</li>
-                            </ul>
-                        </Text>
-                    </DivLevel>
-                </div>
-            </Page>
+                <Grid>
+                    <Cell size={6}>
+                        {UserService.isAuthenticated() && this.props.event.organiserUsername == UserService.getCurrentUser().username ?
+                            <Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link>
+                            : <div></div>
+                        }
+                    </Cell>
+                    <Cell size={6} style={{textAlign:'right'}}>
+                        {UserService.isAuthenticated() && this.props.event.organiserUsername == UserService.getCurrentUser().username ?
+                            <Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button>
+                            : <div></div>
+                        }
+                    </Cell>
+                </Grid>
+            </Card>
         );
     }
 }

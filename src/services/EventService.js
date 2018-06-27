@@ -67,4 +67,26 @@ export default class EventService {
         });
     }
 
+    static participateEvent(eventid,username){
+        var oldEvent;
+        EventService.getEvent(eventid).then((data) => {
+            oldEvent = data;
+            if (oldEvent.participantList.indexOf(username) > -1){
+                // do nothing, already participant
+            } else {
+                oldEvent.participantList.push(username);
+            }
+            EventService.updateEvent(oldEvent);
+        }).catch((e) => {
+            console.error(e);
+        });
+    }
+
+    static isParticipating(participantList,username) {
+        if (participantList.indexOf(username) > -1){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

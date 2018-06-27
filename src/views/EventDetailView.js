@@ -1,8 +1,12 @@
 import React from 'react';
 
 import { EventDetail } from '../components/EventDetail';
+import Page from '../components/Page';
 
 import EventService from '../services/EventService';
+import UserService from '../services/UserService';
+
+import {PageHeader} from 'react-bootstrap';
 
 class EventDetailView extends React.Component {
 
@@ -25,7 +29,10 @@ class EventDetailView extends React.Component {
         }).catch((e) => {
             console.error(e);
         });
+    }
 
+    participateEvent(id){
+        EventService.participateEvent(id,UserService.getCurrentUser().username);
     }
 
     render() {
@@ -34,7 +41,14 @@ class EventDetailView extends React.Component {
         }
 
         return (
-            <EventDetail event={this.state.event}/>
+            <Page>
+                <div className="container">
+                    <PageHeader>
+                        {this.state.event.title}
+                    </PageHeader>
+                    <EventDetail event={this.state.event} onParticipate={(id) => this.participateEvent(id)}/>
+                </div>
+            </Page>
         );
     }
 }

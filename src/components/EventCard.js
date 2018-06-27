@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Card, CardTitle, CardText,Grid, Cell } from 'react-md';
 import { SimpleLink } from './SimpleLink';
 import UserService from "../services/UserService";
-import {  FontIcon, Button } from 'react-md';
+import { FontIcon, Button } from 'react-md';
 import { Link } from 'react-router-dom';
 
 
@@ -48,32 +48,15 @@ export class EventCard extends React.Component {
                      style={{width:'100%'}}/>
                 <CardTitle title={
                     <SimpleLink to={`/participate/${this.props.event._id}`}>{this.props.event.title}</SimpleLink>
-                } style={{style}}>
+                } subtitle={this.props.event.organiserUsername} style={{style}}>
 
                 </CardTitle>
                 <CardText style={{style}}>{this.props.event.level}</CardText>
                 <CardText style={{style}}>{this.props.event.location}</CardText>
-                <CardText style={{style}}>{this.props.event.description}</CardText>
                 <CardText style={{style}}>{this.props.event.start}</CardText>
-                <CardText style={{style}}>{this.props.event.transport}</CardText>
                 <Participate>
                     <Link style={{color:'white'}} to={`/participate/${this.props.event._id}`}>{'Join'}</Link>
                 </Participate>
-                <Grid>
-                    <Cell size={6}>
-                        {UserService.isAuthenticated() ?
-                            <Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link>
-                            : <Link to={'/login'}><FontIcon>mode_edit</FontIcon></Link>
-                        }
-                        </Cell>
-                    <Cell size={6} style={{textAlign:'right'}}>
-                        {UserService.isAuthenticated() ?
-                            <Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button>
-                            : <Link to={'/login'}><FontIcon>delete</FontIcon></Link>
-                        }
-                    </Cell>
-                </Grid>
-
             </Card>
         );
     }

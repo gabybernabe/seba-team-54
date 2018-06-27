@@ -23,7 +23,7 @@ export class EventListRow extends React.Component {
                 {UserService.isAuthenticated() ?
                     <TableColumn><Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link></TableColumn>
                     : <TableColumn><Link to={'/login'}><FontIcon>mode_edit</FontIcon></Link></TableColumn>
-                }
+                }w
                 {UserService.isAuthenticated() ?
                     <TableColumn><Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button></TableColumn>
                     : <TableColumn><Link to={'/login'}><FontIcon>delete</FontIcon></Link></TableColumn>

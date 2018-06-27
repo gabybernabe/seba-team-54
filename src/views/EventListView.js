@@ -154,7 +154,7 @@ class EventListView extends React.Component {
 
                 <div className="container">
                     <Grid>
-                        {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
+                        {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event} onDelete={(id) => this.deleteEvent(id)}/></Cell>)}
                     </Grid>
                 </div>
             </Page>

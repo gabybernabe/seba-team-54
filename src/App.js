@@ -1,5 +1,5 @@
 import React from 'react';
-import {  BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {  BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 
 import EventListView from "./views/EventListView"
 import EventDetailView from "./views/EventDetailView";
@@ -19,7 +19,13 @@ class App extends React.Component {
             routes: [
                 { component: EventListView , path: '/', exact: true},
                 { component: EventDetailView , path: '/participate/:id'},
-                { component: EventFormView , path: '/organize', exact: true},
+                { render: (props) => {
+                        if(UserService.isAuthenticated()) {
+                            return (<EventFormView {... props} />)
+                        }
+                        else {
+                            return (<Redirect to={'/login'}/>)
+                        }} , path: '/organize'},
                 { render: (props) => {
                         if(UserService.isAuthenticated()) {
                             return (<EventFormView {... props} />)
