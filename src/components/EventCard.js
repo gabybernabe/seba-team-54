@@ -2,10 +2,10 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import { Card, CardTitle, CardText, TableFooter,Grid, Cell } from 'react-md';
+import { Card, CardTitle, CardText,Grid, Cell } from 'react-md';
 import { SimpleLink } from './SimpleLink';
 import UserService from "../services/UserService";
-import { TableRow, TableColumn, FontIcon, Button } from 'react-md';
+import {  FontIcon, Button } from 'react-md';
 import { Link } from 'react-router-dom';
 
 
@@ -30,8 +30,6 @@ const Participate = styled.button`
     overflow: visible;
     box-sizing: border-box;
     break-word: break-all;
-    column-count: 3;
-column-gap: 20px;
 `;
 
 const style = { textAlign:'justify', wordWrap:'break-word',  wordBreak: 'break-all' };
