@@ -8,19 +8,28 @@ import BlogFormView from "../views/BlogFormView";
 
 const styleDiv = {display:"inline-block", textAlign:"right", float:"right", marginRight:"1%"}
 
+
+function show () { this.setState({visible:true})};
+function hide () { this.setState({visible:false})};
+
 export class WriteButton extends Component {
 
     constructor(props) {
         super(props)
-        const { classes } = props;
 
-        this.state = { visible : false };
-        this.show = this.show.bind(this)
-        this.hide = this.hide.bind(this)
+        this.state = { visible:false };
+        //FOR MODAL ON ON STARTUP
+       // if (typeof props.visible === "undefined" || !props.visible)
+       //     this.state = { visible:false };
+       // else
+       //     this.state = { visible:true };
+
+        console.log(props)
+        console.log(this.state)
+        this.show = show.bind(this)
+        this.hide = hide.bind(this)
     };
 
-    show () { this.setState({visible:true})};
-    hide () { this.setState({visible:false})};
 
 
     render() {

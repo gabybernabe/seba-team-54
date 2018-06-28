@@ -1,6 +1,5 @@
 import React from 'react';
 import EventService from '../services/EventService';
-import { EventList } from '../components/EventList';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -17,9 +16,6 @@ import {FacebookShareButton,
         LinkedinIcon,
         TwitterShareButton,
         TwitterIcon} from 'react-share';
-
-import Button from "@material-ui/core/es/Button/Button";
-import AddIcon from '@material-ui/icons/Add';
 
 
 export class BlogListView extends React.Component {
