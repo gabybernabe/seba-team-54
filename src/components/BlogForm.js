@@ -87,7 +87,7 @@ class BlogForm extends React.Component {
     }
 
     handleSubmit(submitEvent) {
-        submitEvent.prarticleDefault();
+        submitEvent.preventDefault();
 
         let article = this.props.article;
         if(article == undefined) {
