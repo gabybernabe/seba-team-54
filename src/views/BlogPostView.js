@@ -1,6 +1,5 @@
 import React from 'react';
 import EventService from '../services/EventService';
-import { EventList } from '../components/EventList';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
