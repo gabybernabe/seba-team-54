@@ -82,6 +82,7 @@ class EventListView extends React.Component {
             date: moment(),
             level: 'select'
         };
+
         this.dateChanged = this.dateChanged.bind(this);
         this.levelChanged = this.levelChanged.bind(this);
     }
@@ -91,7 +92,7 @@ class EventListView extends React.Component {
             loading: true
         });
 
-        EventService.getEvents('select','date').then((data) => {
+        EventService.getEvents('select','').then((data) => {
             console.log(data);
             this.setState({
                 data: [...data],
@@ -115,8 +116,17 @@ class EventListView extends React.Component {
         console.log(event.target.value);
     }
 
-    dateChanged(d){
-        this.setState({date: d});
+    dateChanged(date){
+        this.setState({date: date});
+     /*   EventService.getEvents('',JSON.stringify(date).substring(1,11)).then((data) => {
+            console.log(data);
+            this.setState({
+                data: [...data]
+            });
+        }).catch((e) => {
+            console.log(e);
+        });*/
+       console.log( JSON.stringify(date).substring(1,11));
     }
 
     deleteEvent(id){
@@ -162,7 +172,7 @@ class EventListView extends React.Component {
                             <Text>Date:</Text>
                             <Picker>
                                 <DatePicker style={{borderRadius:'4px'}} selected={this.state.date}
-                                            onChange={this.dateChanged}  />
+                                            onChange={this.dateChanged} />
                             </Picker>
                         </div>
                     </DivLevel>
