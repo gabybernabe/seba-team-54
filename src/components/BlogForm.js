@@ -86,8 +86,8 @@ class BlogForm extends React.Component {
         this.setState(Object.assign({}, this.state, {img: value}));
     }
 
-    handleSubmit(submitEvent) {
-        submitEvent.preventDefault();
+    handleSubmit(submitArticle) {
+        submitArticle.preventDefault();
 
         let article = this.props.article;
         if(article == undefined) {

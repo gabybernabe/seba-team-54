@@ -4,7 +4,7 @@ import HttpService from './HttpService';
 
 export default class BlogService {
 
-    static baseURL() {return "http://localhost:3000/blogs" }
+    static baseURL() {return "http://localhost:3000/posts" }
 
     static getBlogs(){
         return new Promise((resolve, reject) => {
