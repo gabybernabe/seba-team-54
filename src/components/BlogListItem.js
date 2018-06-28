@@ -33,8 +33,8 @@ export class BlogListItem extends React.Component {
         const h5Style = {display:"inline-block"}
         const styleImg = {width:'35%', margin:'0 0 1px 2%', height:"100%", display:"table-cell", float:"right"}
         const stylePostTitle = {width:"80%"}
-        const styleListItem = {width:'90%', margin:'15px 5%', overflow:"hidden", display:"table", paddingTop:"5px 15px"}
-        const preview = this.props.post.content.slice(0,200)
+        const styleListItem = {width:'100%', margin:'15px 0%', overflow:"hidden", display:"table", paddingTop:"5px 15px"}
+        const preview = this.props.post.content.slice(0,285)
         return(
             <Link style={{color:'white'}} to={`/blog/${this.props.post._id}`}>
                 <Card style={styleListItem} >
@@ -44,10 +44,12 @@ export class BlogListItem extends React.Component {
                     </Card>
                     <div className="postTitle" style={stylePostTitle}>
                         <div style={{display:"inline-block",float:"right", textAlign:"right", paddingTop:"24px"}}>
-                            <h4 style={h4Style}>{this.props.post.authorUsername}</h4>
-                            <h5 style={h5Style}>{this.props.post.date}</h5>
+                            <h4 style={h4Style}>
+                                {this.props.post.authorUsername[0].toUpperCase() + this.props.post.authorUsername.slice(1)}
+                            </h4>
+                            <h5 style={h5Style}>{this.props.post.date.split("T").slice(0,1)}</h5>
                         </div>
-                        <CardTitle style={{display:"inline-block"}} title={this.props.post.title}/>
+                        <CardTitle style={{fontWeight:"900",display:"inline-block"}} title={this.props.post.title}/>
                     </div>
                     <CardText style={{width:"65%"}}>
                         <p> {preview}... </p>

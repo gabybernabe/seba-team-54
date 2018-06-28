@@ -21,6 +21,7 @@ import {FacebookShareButton,
 import Button from "@material-ui/core/es/Button/Button";
 import AddIcon from '@material-ui/icons/Add';
 import BlogService from "../services/BlogService";
+import UserService from "../services/UserService";
 
 
 export class BlogListView extends React.Component {
@@ -33,6 +34,7 @@ export class BlogListView extends React.Component {
             date: moment(),
             stringDate: "",
             level: 'select',
+            active: false
         }
     }
     componentWillMount(){
@@ -62,8 +64,8 @@ export class BlogListView extends React.Component {
             <Page>
                 {console.log(this.state.data)}
                 <div style={{margin:"5%"}}>
-                    <WriteButton visible={true}/>
-                    <h1 style={{margin:"20px 0"}}> BLOG </h1>
+                    <WriteButton active={UserService.isAuthenticated()} visible={true}/>
+                    <h1 style={{fontWeight:"800",margin:"20px 0"}}> BLOG </h1>
                 </div>
 
 

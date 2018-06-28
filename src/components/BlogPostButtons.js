@@ -5,6 +5,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { Button, SVGIcon, DialogContainer } from 'react-md';
 import BlogFormView from "../views/BlogFormView";
+import {Redirect} from "react-router-dom";
 
 const styleDiv = {display:"inline-block", textAlign:"right", float:"right", marginRight:"1%"}
 
@@ -17,7 +18,10 @@ export class WriteButton extends Component {
     constructor(props) {
         super(props)
 
-        this.state = { visible:false };
+        this.state = {
+            visible:false,
+            redirect:false
+        };
         //FOR MODAL ON ON STARTUP
        // if (typeof props.visible === "undefined" || !props.visible)
        //     this.state = { visible:false };
@@ -28,8 +32,12 @@ export class WriteButton extends Component {
         console.log(this.state)
         this.show = show.bind(this)
         this.hide = hide.bind(this)
+        this.renderRedirect = this.renderRedirect.bind(this)
     };
 
+    renderRedirect() {
+        this.setState({redirect:true});
+    }
 
 
     render() {
@@ -40,10 +48,17 @@ export class WriteButton extends Component {
             children: 'Cancel',
         }];
 
+        const tooltipLabel = this.props.active ? "Write a new blog post" : "Login or register to write a blog post"
         return (
             <div>
+                {this.state.redirect && <Redirect to="/login"/>}
                 <div style={styleDiv}>
-                    <Button floating primary tooltipLabel="Write a new Post" className="addButton" onClick={this.show}>
+                    <Button
+                        floating
+                        primary
+                        tooltipLabel={tooltipLabel}
+                        className="addButton"
+                        onClick={this.props.active ? this.show : this.renderRedirect}>
                         <AddIcon/>
                     </Button>
                 </div>
