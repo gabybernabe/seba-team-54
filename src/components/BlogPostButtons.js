@@ -6,12 +6,14 @@ import EditIcon from '@material-ui/icons/Edit';
 import { Button, SVGIcon, DialogContainer } from 'react-md';
 import BlogFormView from "../views/BlogFormView";
 import {Redirect} from "react-router-dom";
+import BlogService from "../services/BlogService";
 
 const styleDiv = {display:"inline-block", textAlign:"right", float:"right", marginRight:"1%"}
 
 
 function show () { this.setState({visible:true})};
 function hide () { this.setState({visible:false})};
+function renderRedirect() { this.setState({redirect:true})};
 
 export class WriteButton extends Component {
 
@@ -32,12 +34,8 @@ export class WriteButton extends Component {
         console.log(this.state)
         this.show = show.bind(this)
         this.hide = hide.bind(this)
-        this.renderRedirect = this.renderRedirect.bind(this)
+        this.renderRedirect = renderRedirect.bind(this)
     };
-
-    renderRedirect() {
-        this.setState({redirect:true});
-    }
 
 
     render() {
@@ -76,27 +74,104 @@ export class WriteButton extends Component {
         );
     }
 }
+export class EditButton extends React.Component {
 
-export function EditButton(props) {
-    const { classes } = props;
-    return (
-        <div style={styleDiv}>
-                <Button floating primary tooltipLabel="Edit this Post" className="editButton" >
-                    <EditIcon />
-                </Button>
-        </div>
-    );
+    constructor(props) {
+        super(props)
+        const {classes} = props;
+
+        this.state = {visible: false};
+        this.show = show.bind(this)
+        this.hide = hide.bind(this)
+    };
+
+    render() {
+        const {visible} = this.state
+        const actions = [{
+            onClick: this.hide,
+            primary: true,
+            children: 'Cancel',
+            },
+            {onClick: () => {
+                BlogService.updateBlog(article).then(
+                    this.renderRedirect()
+                )},
+            primary: true,
+            children: "Update"
+            }
+        ];
+
+        return (
+            <div>
+                <div style={styleDiv}>
+                    <Button floating primary tooltipLabel="Edit this Post" className="editButton">
+                        <EditIcon/>
+                    </Button>
+                </div>
+                <DialogContainer
+                    visible={visible}
+                    id="createBlogPostDialog"
+                    onHide={this.hide}
+                    modal
+                    actions={actions}
+                    dialogStyle={{width: "90%"}}>
+                    <p>Are you sure you want to delete this post?</p>
+                </DialogContainer>
+            </div>
+        );
+    }
 }
 
-export function DeleteButton(props) {
-    const { classes } = props;
-    return (
-        <div style={styleDiv}>
-                <Button floating primary tooltipLabel="Delete this Post" className="deleteButton" >
-                    <DeleteIcon />
-                </Button>
-        </div>
-    );
+export class DeleteButton extends React.Component {
+     constructor(props) {
+        super(props)
+        this.state = {
+                visible: false,
+                redirect: false,
+            };
+        this.show = show.bind(this)
+        this.hide = hide.bind(this)
+        this.renderRedirect = renderRedirect.bind(this)
+    };
+
+
+
+    render() {
+        const {visible} = this.state
+        const actions = [{
+            onClick: this.hide,
+            primary: true,
+            children: 'Cancel',
+            },
+            {onClick: () => {
+                BlogService.deleteBlog(this.props.id).then(
+                   this.renderRedirect()
+                )},
+            primary : true,
+            children: "Delete"
+            }
+        ];
+
+        return (
+            <div>
+                <div style={styleDiv}>
+                    {this.state.redirect && <Redirect to="/blog"/> }
+                     <Button floating primary tooltipLabel="Delete this Post" className="deleteButton" onClick={this.show} >
+                        <DeleteIcon />
+                    </Button>
+                </div>
+                <DialogContainer
+                    visible={visible}
+                    id="createBlogPostDialog"
+                    onHide={this.hide}
+                    modal
+                    actions={actions}
+                    dialogStyle={{width: "90%"}}>
+                    Are you sure you want to delete this post?
+                </DialogContainer>
+            </div>
+        );
+    }
 }
 
 
