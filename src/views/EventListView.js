@@ -129,25 +129,6 @@ class EventListView extends React.Component {
        console.log( JSON.stringify(date).substring(1,11));
     }
 
-    deleteEvent(id){
-        this.setState({
-            data: [...this.state.data],
-            loading: true
-        });
-        EventService.deleteEvent(id).then((message) => {
-
-            let eventIndex = this.state.data.map(event => event['_id']).indexOf(id);
-            let events = this.state.data;
-            events.splice(eventIndex, 1);
-            this.setState({
-                data: [...events],
-                loading: false
-            });
-        }).catch((e) => {
-            console.error(e);
-        });
-    }
-
     render() {
         if (this.state.loading) {
             return (<Page><h2>Loading...</h2></Page>);
@@ -180,7 +161,7 @@ class EventListView extends React.Component {
 
                 <div className="container">
                     <Grid>
-                        {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event} onDelete={(id) => this.deleteEvent(id)}/></Cell>)}
+                        {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
                     </Grid>
                 </div>
             </Page>
