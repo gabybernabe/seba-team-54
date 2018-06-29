@@ -59,7 +59,8 @@ export class EventCard extends React.Component {
 
         return (
             <Card style ={{width:'100%', fontSize:'auto', boxSizing:'border-box', wordBreak: 'break-all'}} key={this.props.children}>
-                <img src={ this.props.event.imageUrl=='' ? imageArray[Math.floor((Math.random() * 12) + 1) - 1] : this.props.event.imageUrl}
+                <img src={ imageArray[Math.floor((Math.random() * 12) + 1) - 1] }
+                     // <img src={ this.props.event.imageUrl=='' ? imageArray[Math.floor((Math.random() * 12) + 1) - 1] : this.props.event.imageUrl}
                      style={{width:'100%', maxHeight:'206px'}}/>
                 <CardTitle title={
                     <SimpleLink to={`/participate/${this.props.event._id}`}>{this.props.event.title}</SimpleLink>

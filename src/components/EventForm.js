@@ -140,6 +140,7 @@ class EventForm extends React.Component {
                             label="Start"
                             id="StartField"
                             type="text"
+                            placeholder="YYYY-MM-DD"
                             className="md-row"
                             required={true}
                             value={this.state.start}

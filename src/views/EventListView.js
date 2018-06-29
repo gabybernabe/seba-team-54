@@ -71,6 +71,23 @@ const Picker = styled.div`
     display: inline-block;
 `;
 
+const FilterButton = styled.button`
+  display: inline-block;
+  height: 2em;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  background-color: light-grey;
+  border: none;
+  border-radius: 8px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  
+  &:hover {background-color: #a9a5a5}
+
+`
+
 
 class EventListView extends React.Component {
 
@@ -80,11 +97,14 @@ class EventListView extends React.Component {
             loading: false,
             data: [],
             date: moment(),
-            level: 'select'
+            stringDate: "",
+            level: 'select',
+            click:true
         };
 
         this.dateChanged = this.dateChanged.bind(this);
         this.levelChanged = this.levelChanged.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentWillMount(){
@@ -92,7 +112,7 @@ class EventListView extends React.Component {
             loading: true
         });
 
-        EventService.getEvents('select','').then((data) => {
+        EventService.getEvents(this.state.level,this.state.date).then((data) => {
             console.log(data);
             this.setState({
                 data: [...data],
@@ -105,7 +125,7 @@ class EventListView extends React.Component {
 
     levelChanged(event){
         this.setState({level: event.target.value});
-        EventService.getEvents(event.target.value, '').then((data) => {
+        EventService.getEvents(event.target.value, this.state.stringDate).then((data) => {
             console.log(data);
             this.setState({
                 data: [...data]
@@ -117,16 +137,30 @@ class EventListView extends React.Component {
     }
 
     dateChanged(date){
-        this.setState({date: date});
-     /*   EventService.getEvents('',JSON.stringify(date).substring(1,11)).then((data) => {
+        let newStringDate = JSON.stringify(date).substring(1,11);
+        this.setState({date: date, stringDate: newStringDate}, () => {
+            EventService.getEvents(this.state.level,this.state.stringDate).then((data) => {
+                console.log(data);
+                this.setState({
+                    data: [...data]
+                });
+            }).catch((e) => {
+                console.log(e);
+            });
+            console.log( this.state.stringDate);
+        });
+    }
+
+    handleClick(click){
+        EventService.getEvents('select', '').then((data) => {
             console.log(data);
             this.setState({
                 data: [...data]
             });
         }).catch((e) => {
             console.log(e);
-        });*/
-       console.log( JSON.stringify(date).substring(1,11));
+        });
+        console.log(click);
     }
 
     render() {
@@ -153,8 +187,11 @@ class EventListView extends React.Component {
                             <Text>Date:</Text>
                             <Picker>
                                 <DatePicker style={{borderRadius:'4px'}} selected={this.state.date}
-                                            onChange={this.dateChanged} />
+                                            onChange={this.dateChanged}/>
                             </Picker>
+                        </div>
+                        <div  style={{wordBreak: 'break-all'}}>
+                            <FilterButton onClick={this.handleClick}>Clear Filters</FilterButton>
                         </div>
                     </DivLevel>
                 </div>
