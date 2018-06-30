@@ -112,7 +112,7 @@ class EventListView extends React.Component {
             loading: true
         });
 
-        EventService.getEvents(this.state.level,this.state.date).then((data) => {
+        EventService.getEvents(this.state.level,this.state.stringDate).then((data) => {
             console.log(data);
             this.setState({
                 data: [...data],
@@ -150,6 +150,7 @@ class EventListView extends React.Component {
             console.log( this.state.stringDate);
         });
     }
+
 
     handleClick(click){
         EventService.getEvents('select', '').then((data) => {
