@@ -98,7 +98,9 @@ export default class EventService {
             } else {
                 oldEvent.participantList.push(username);
             }
-            EventService.updateEvent(oldEvent);
+            EventService.updateEvent(oldEvent).then(() => {
+                console.log("Participant added");
+            });
         }).catch((e) => {
             console.error(e);
         });

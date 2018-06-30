@@ -4,6 +4,7 @@ import React from 'react';
 import { Card, Button, TextField } from 'react-md';
 import { withRouter } from 'react-router-dom';
 import UserService from '../services/UserService';
+import moment from 'moment';
 
 import { AlertMessage } from './AlertMessage';
 
@@ -35,8 +36,8 @@ class EventForm extends React.Component {
             this.state = {
                 title : '',
                 location : '',
-                start : '',
-                end : '',
+                start : moment().format("YYYY-MM-DD").toString(),
+                end : moment().format("YYYY-MM-DD").toString(),
                 level : '',
                 description : '',
                 participants: '',
@@ -197,7 +198,7 @@ class EventForm extends React.Component {
                             value={this.state.transport}
                             onChange={this.handleChangeTransport}/>
                         <TextField
-                            label="Image URLs"
+                            label="Image URL"
                             id="ImgUrlsField"
                             type="text"
                             className="md-row"
@@ -205,7 +206,7 @@ class EventForm extends React.Component {
                             value={this.state.imgUrls}
                             onChange={this.handleChangeImgUrls}/>
                         <Button id="submit" type="submit"
-                                disabled={this.state.title == undefined || this.state.title == '' || this.state.start == undefined || this.state.start == '' || this.state.end == undefined || this.state.end == ''}
+                                disabled={this.state.title == undefined || this.state.title == '' || this.state.start == undefined || this.state.start == '' || this.state.start.toString().length != 10 || this.state.end == undefined || this.state.end.toString().length != 10 || this.state.level == ''}
                                 raised primary className="md-cell md-cell--2">Organize</Button>
                         <Button id="reset" type="reset" raised secondary className="md-cell md-cell--2">Dismiss</Button>
                         <AlertMessage className="md-row md-full-width" >{this.props.error ? `${this.props.error}` : ''}</AlertMessage>

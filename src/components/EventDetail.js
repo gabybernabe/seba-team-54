@@ -3,9 +3,7 @@
 import React from 'react';
 import { Card, CardTitle, CardText, Button, FontIcon} from 'react-md';
 
-import Page from './Page';
 import styled from "styled-components";
-import Slider from "react-slick";
 import {Grid, Cell} from 'react-md';
 import { Link } from 'react-router-dom';
 
@@ -122,9 +120,12 @@ export class EventDetail extends React.Component {
                             Already participating
                         </Button>
                         :
+                        UserService.isAuthenticated() ?
                         <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
                             Participate
-                        </Button>
+                        </Button> : <Button flat primary swapTheming>
+                                <Link to={'/login'}>Participate</Link>
+                            </Button>
                     }
                 </CardText>
 
