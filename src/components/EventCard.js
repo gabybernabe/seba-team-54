@@ -59,7 +59,7 @@ export class EventCard extends React.Component {
 
         return (
             <Card style ={{width:'100%', fontSize:'auto', boxSizing:'border-box', wordBreak: 'break-all'}} key={this.props.children}>
-                <img src={ imageArray[Math.floor((Math.random() * 12) + 1) - 1] }
+                <img src={ this.props.event.imgUrls[0] }
                      // <img src={ this.props.event.imageUrl=='' ? imageArray[Math.floor((Math.random() * 12) + 1) - 1] : this.props.event.imageUrl}
                      style={{width:'100%', maxHeight:'206px'}}/>
                 <CardTitle title={
