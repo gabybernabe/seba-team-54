@@ -1,3 +1,4 @@
+
 "use strict";
 
 import React from 'react';
@@ -48,37 +49,35 @@ class UserLogin extends React.Component {
 
     render() {
         return (
-            <Page>
-                <Card style={style} className="md-block-centered">
-                    <form className="md-grid" onSubmit={this.handleSubmit} onReset={() => this.props.history.goBack()}>
-                        <TextField
-                            label="Login"
-                            id="LoginField"
-                            type="text"
-                            className="md-row"
-                            required={true}
-                            value={this.state.username}
-                            onChange={this.handleChangeUsername}
-                            errorText="Login is required"/>
-                        <TextField
-                            label="Password"
-                            id="PasswordField"
-                            type="password"
-                            className="md-row"
-                            required={true}
-                            value={this.state.password}
-                            onChange={this.handleChangePassword}
-                            errorText="Password is required"/>
+            <Card style={style} className="md-block-centered">
+                <form className="md-grid" onSubmit={this.handleSubmit} onReset={() => this.props.history.goBack()}>
+                    <TextField
+                        label="Login"
+                        id="LoginField"
+                        type="text"
+                        className="md-row"
+                        required={true}
+                        value={this.state.username}
+                        onChange={this.handleChangeUsername}
+                        errorText="Login is required"/>
+                    <TextField
+                        label="Password"
+                        id="PasswordField"
+                        type="password"
+                        className="md-row"
+                        required={true}
+                        value={this.state.password}
+                        onChange={this.handleChangePassword}
+                        errorText="Password is required"/>
 
-                        <Button id="submit" type="submit"
-                                disabled={this.state.username == undefined || this.state.username == '' || this.state.password == undefined || this.state.password == '' ? true : false}
-                                raised primary className="md-cell md-cell--2">Login</Button>
-                        <Button id="reset" type="reset" raised secondary className="md-cell md-cell--2">Dismiss</Button>
-                        <Link to={'/register'} className="md-cell">Not registered yet?</Link>
-                        <AlertMessage className="md-row md-full-width" >{this.props.error ? `${this.props.error}` : ''}</AlertMessage>
-                    </form>
-                </Card>
-            </Page>
+                    <Button id="submit" type="submit"
+                            disabled={this.state.username == undefined || this.state.username == '' || this.state.password == undefined || this.state.password == '' ? true : false}
+                            raised primary className="md-cell md-cell--2">Login</Button>
+                    <Button id="reset" type="reset" raised secondary className="md-cell md-cell--2">Dismiss</Button>
+                    <Link to={'/register'} className="md-cell">Not registered yet?</Link>
+                    <AlertMessage className="md-row md-full-width" >{this.props.error ? `${this.props.error}` : ''}</AlertMessage>
+                </form>
+            </Card>
         );
     }
 }
