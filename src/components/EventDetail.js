@@ -1,15 +1,18 @@
 "use strict";
 
 import React from 'react';
-import { Card, CardTitle, ListItem, CardText, Button, FontIcon, FlatList, DialogContainer, TextField } from 'react-md';
+import { Card, CardTitle, ListItem, CardText, Button, FontIcon, FlatList, DialogContainer, TextField, SVGIcon, Avatar, IconSeparator } from 'react-md';
 
 import styled from "styled-components";
 import Slider from "react-slick";
-import {Grid, Cell} from 'react-md';
+import { Grid, Cell } from 'react-md';
 import { Link } from 'react-router-dom';
 import { SimpleLink } from './SimpleLink';
 import UserService from "../services/UserService";
 import EventService from "../services/EventService";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
 
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
@@ -123,26 +126,25 @@ export class EventDetail extends React.Component {
                 <Card style={{ width: '60%', fontSize: 'auto', boxSizing: 'border-box', wordBreak: 'break-all', marginRight: '30px', borderWidth: 0, borderRadius: 0 }} key={this.props.children}>
                     <Slider {...settings}>
                         <div>
-                            <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" height="100%" width="100%" />
+                            <img src={this.props.event.imgUrls[0]} height="400px" width="680px" />
                         </div>
                         <div>
-                            <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" height="100%" width="100%" />
+                            <img src={this.props.event.imgUrls[0]} height="400px" width="680px" />
                         </div>
                         <div>
-                            <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" height="100%" width="100%" />
+                            <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" height="400px" width="680px" />
                         </div>
-                        <div>
-                            <img src="http://placekitten.com/g/400/200" height="100%" width="100%" />
-                        </div>
+
                     </Slider>
                     <CardTitle title={this.props.event.title} subtitle={this.props.event.description} />
 
-                    <CardText>
+
+                    <CardText >
                         <h5>
                             Departure: {this.props.event.location}
                         </h5>
                         <h5>
-                            Participants: {this.props.event.participants}
+                            Participants: {this.props.event.participantList.length} / {this.props.event.participants}
                         </h5>
                         <h5>
                             Level: {this.props.event.level}
@@ -153,20 +155,35 @@ export class EventDetail extends React.Component {
                         <h5>
                             List of participants: {this.prettifyParticipantList(this.props.event.participantList)}
                         </h5>
-                        {EventService.isParticipating(this.props.event.participantList,UserService.getCurrentUser().username) ?
-                        <Button raised disable="true">
-                            Already participating
-                        </Button>
-                        :
-                        UserService.isAuthenticated() ?
-                        <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
-                            Participate
-                        </Button> : <Button flat primary swapTheming>
-                                <Link to={'/login'}>Participate</Link>
-                            </Button>
-                    }
-                    </CardText>
+                        {EventService.isParticipating(this.props.event.participantList, UserService.getCurrentUser().username) ?
 
+                            <Button raised onClick={() => this.props.onDelete(this.props.event._id.participantList.remove(username))} >Already Participating</Button>
+                            :
+                            UserService.isAuthenticated() ?
+                                <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
+                                    Participate
+                        </Button>
+                                :
+                                <Button flat primary swapTheming>
+                                    <Link to={'/login'}>Login to participate</Link>
+                                </Button>
+
+                        }
+                    </CardText>
+                    <Grid>
+                        <Cell size={6}>
+                            {UserService.isAuthenticated() && this.props.event.organiserUsername == UserService.getCurrentUser().username ?
+                                <Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link>
+                                : <div></div>
+                            }
+                        </Cell>
+                        <Cell size={6} style={{ marginLeft: '5px', textAlign: 'right' }}>
+                            {UserService.isAuthenticated() && this.props.event.organiserUsername == UserService.getCurrentUser().username ?
+                                <Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button>
+                                : <div></div>
+                            }
+                        </Cell>
+                    </Grid>
 
                 </Card>
 
@@ -180,20 +197,7 @@ export class EventDetail extends React.Component {
                     />
                 </Card>
 
-                <Grid>
-                    <Cell size={6}>
-                        {UserService.isAuthenticated() && this.props.event.organiserUsername == UserService.getCurrentUser().username ?
-                            <Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link>
-                            : <div></div>
-                        }
-                    </Cell>
-                    <Cell size={6} style={{textAlign:'right'}}>
-                        {UserService.isAuthenticated() && this.props.event.organiserUsername == UserService.getCurrentUser().username ?
-                            <Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button>
-                            : <div></div>
-                        }
-                    </Cell>
-                </Grid>
+
 
             </div>
 
