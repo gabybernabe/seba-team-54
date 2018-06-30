@@ -71,6 +71,23 @@ const Picker = styled.div`
     display: inline-block;
 `;
 
+const FilterButton = styled.button`
+  display: inline-block;
+  height: 2em;
+  font-size: 13px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  background-color: light-grey;
+  border: none;
+  border-radius: 8px;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+  
+  &:hover {background-color: #a9a5a5}
+
+`
+
 
 class EventListView extends React.Component {
 
@@ -80,10 +97,14 @@ class EventListView extends React.Component {
             loading: false,
             data: [],
             date: moment(),
-            level: 'select'
+            stringDate: "",
+            level: 'select',
+            click:true
         };
+
         this.dateChanged = this.dateChanged.bind(this);
         this.levelChanged = this.levelChanged.bind(this);
+        this.handleClick = this.handleClick.bind(this);
     }
 
     componentWillMount(){
@@ -91,7 +112,7 @@ class EventListView extends React.Component {
             loading: true
         });
 
-        EventService.getEvents('select','date').then((data) => {
+        EventService.getEvents(this.state.level,this.state.stringDate).then((data) => {
             console.log(data);
             this.setState({
                 data: [...data],
@@ -104,7 +125,7 @@ class EventListView extends React.Component {
 
     levelChanged(event){
         this.setState({level: event.target.value});
-        EventService.getEvents(event.target.value, '').then((data) => {
+        EventService.getEvents(event.target.value, this.state.stringDate).then((data) => {
             console.log(data);
             this.setState({
                 data: [...data]
@@ -115,27 +136,32 @@ class EventListView extends React.Component {
         console.log(event.target.value);
     }
 
-    dateChanged(d){
-        this.setState({date: d});
+    dateChanged(date){
+        let newStringDate = JSON.stringify(date).substring(1,11);
+        this.setState({date: date, stringDate: newStringDate}, () => {
+            EventService.getEvents(this.state.level,this.state.stringDate).then((data) => {
+                console.log(data);
+                this.setState({
+                    data: [...data]
+                });
+            }).catch((e) => {
+                console.log(e);
+            });
+            console.log( this.state.stringDate);
+        });
     }
 
-    deleteEvent(id){
-        this.setState({
-            data: [...this.state.data],
-            loading: true
-        });
-        EventService.deleteEvent(id).then((message) => {
 
-            let eventIndex = this.state.data.map(event => event['_id']).indexOf(id);
-            let events = this.state.data;
-            events.splice(eventIndex, 1);
+    handleClick(click){
+        EventService.getEvents('select', '').then((data) => {
+            console.log(data);
             this.setState({
-                data: [...events],
-                loading: false
+                data: [...data]
             });
         }).catch((e) => {
-            console.error(e);
+            console.log(e);
         });
+        console.log(click);
     }
 
     render() {
@@ -162,15 +188,18 @@ class EventListView extends React.Component {
                             <Text>Date:</Text>
                             <Picker>
                                 <DatePicker style={{borderRadius:'4px'}} selected={this.state.date}
-                                            onChange={this.dateChanged}  />
+                                            onChange={this.dateChanged}/>
                             </Picker>
+                        </div>
+                        <div  style={{wordBreak: 'break-all'}}>
+                            <FilterButton onClick={this.handleClick}>Clear Filters</FilterButton>
                         </div>
                     </DivLevel>
                 </div>
 
                 <div className="container">
                     <Grid>
-                        {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event} onDelete={(id) => this.deleteEvent(id)}/></Cell>)}
+                        {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
                     </Grid>
                 </div>
             </Page>

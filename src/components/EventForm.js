@@ -4,6 +4,7 @@ import React from 'react';
 import { Card, Button, TextField } from 'react-md';
 import { withRouter } from 'react-router-dom';
 import UserService from '../services/UserService';
+import moment from 'moment';
 
 import { AlertMessage } from './AlertMessage';
 
@@ -28,21 +29,23 @@ class EventForm extends React.Component {
                 transport: props.event.transport,
                 organiserID: props.event.organiserID,
                 organiserUsername: props.event.organiserUsername,
-                participantList: props.event.participantList
+                participantList: props.event.participantList,
+                imgUrls: props.event.imgUrls
             };
         } else {
             this.state = {
                 title : '',
                 location : '',
-                start : '',
-                end : '',
+                start : moment().format("YYYY-MM-DD").toString(),
+                end : moment().format("YYYY-MM-DD").toString(),
                 level : '',
                 description : '',
                 participants: '',
                 transport: '',
                 organiserID : '',
                 organiserUsername: '',
-                participantList: ''
+                participantList: '',
+                imgUrls: ''
             };
         }
 
@@ -54,6 +57,7 @@ class EventForm extends React.Component {
         this.handleChangeDescription = this.handleChangeDescription.bind(this);
         this.handleChangeParticipants = this.handleChangeParticipants.bind(this);
         this.handleChangeTransport = this.handleChangeTransport.bind(this);
+        this.handleChangeImgUrls = this.handleChangeImgUrls.bind(this);
 
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -90,6 +94,10 @@ class EventForm extends React.Component {
         this.setState(Object.assign({}, this.state, {transport: value}));
     }
 
+    handleChangeImgUrls(value) {
+        this.setState(Object.assign({}, this.state, {imgUrls: value}));
+    }
+
     handleSubmit(submitEvent) {
         submitEvent.preventDefault();
 
@@ -109,6 +117,7 @@ class EventForm extends React.Component {
         event.organiserID = UserService.getCurrentUser().id;
         event.organiserUsername = UserService.getCurrentUser().username;
         event.participantList = UserService.getCurrentUser().username;
+        event.imgUrls = this.state.imgUrls;
 
         this.props.onSubmit(event);
     }
@@ -140,6 +149,7 @@ class EventForm extends React.Component {
                             label="Start"
                             id="StartField"
                             type="text"
+                            placeholder="YYYY-MM-DD"
                             className="md-row"
                             required={true}
                             value={this.state.start}
@@ -149,6 +159,7 @@ class EventForm extends React.Component {
                             label="End"
                             id="EndField"
                             type="text"
+                            placeholder={"YYYY-MM-DD"}
                             className="md-row"
                             required={true}
                             value={this.state.end}
@@ -159,7 +170,7 @@ class EventForm extends React.Component {
                             id="LevelField"
                             type="text"
                             className="md-row"
-                            required={false}
+                            required={true}
                             value={this.state.level}
                             onChange={this.handleChangeLevel}/>
                         <TextField
@@ -186,8 +197,16 @@ class EventForm extends React.Component {
                             required={false}
                             value={this.state.transport}
                             onChange={this.handleChangeTransport}/>
+                        <TextField
+                            label="Image URL"
+                            id="ImgUrlsField"
+                            type="text"
+                            className="md-row"
+                            required={false}
+                            value={this.state.imgUrls}
+                            onChange={this.handleChangeImgUrls}/>
                         <Button id="submit" type="submit"
-                                disabled={this.state.title == undefined || this.state.title == '' || this.state.start == undefined || this.state.start == '' || this.state.end == undefined || this.state.end == ''}
+                                disabled={this.state.title == undefined || this.state.title == '' || this.state.start == undefined || this.state.start == '' || this.state.start.toString().length != 10 || this.state.end == undefined || this.state.end.toString().length != 10 || this.state.level == ''}
                                 raised primary className="md-cell md-cell--2">Organize</Button>
                         <Button id="reset" type="reset" raised secondary className="md-cell md-cell--2">Dismiss</Button>
                         <AlertMessage className="md-row md-full-width" >{this.props.error ? `${this.props.error}` : ''}</AlertMessage>

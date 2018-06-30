@@ -33,6 +33,13 @@ class EventDetailView extends React.Component {
 
     participateEvent(id){
         EventService.participateEvent(id,UserService.getCurrentUser().username);
+        this.props.history.push('/');
+    }
+
+    deleteEvent(id){
+        EventService.deleteEvent(id).then(
+            this.props.history.push('/')
+        );
     }
 
     render() {
@@ -46,7 +53,7 @@ class EventDetailView extends React.Component {
                     <PageHeader>
                         {this.state.event.title}
                     </PageHeader>
-                    <EventDetail event={this.state.event} onParticipate={(id) => this.participateEvent(id)}/>
+                    <EventDetail event={this.state.event} onParticipate={(id) => this.participateEvent(id)} onDelete={(id) => this.deleteEvent(id)}/>
                 </div>
             </Page>
         );

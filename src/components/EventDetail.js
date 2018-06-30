@@ -5,7 +5,7 @@ import { Card, CardTitle, ListItem, CardText, Button, FontIcon, FlatList, Dialog
 
 import styled from "styled-components";
 import Slider from "react-slick";
-import { Grid, Cell } from 'react-md';
+import {Grid, Cell} from 'react-md';
 import { Link } from 'react-router-dom';
 import { SimpleLink } from './SimpleLink';
 import UserService from "../services/UserService";
