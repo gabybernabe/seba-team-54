@@ -76,6 +76,7 @@ export default class EventService {
             oldEvent = data;
             if (oldEvent.participantList.indexOf(username) > -1){
                 // do nothing, already participant
+                oldEvent.participantList.remove(username);
             } else {
                 oldEvent.participantList.push(username);
             }
