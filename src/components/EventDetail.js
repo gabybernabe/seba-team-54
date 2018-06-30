@@ -135,7 +135,7 @@ export class EventDetail extends React.Component {
                             <img src="http://placekitten.com/g/400/200" height="100%" width="100%" />
                         </div>
                     </Slider>
-                    <CardTitle title={this.props.event.title} />
+                    <CardTitle title={this.props.event.title} subtitle={this.props.event.description} />
 
                     <CardText>
                         <h5>
@@ -153,17 +153,18 @@ export class EventDetail extends React.Component {
                         <h5>
                             List of participants: {this.prettifyParticipantList(this.props.event.participantList)}
                         </h5>
-                        {EventService.isParticipating(this.props.event.participantList, UserService.getCurrentUser().username) ?
-                            <Button flat primary swapTheming onclick="myFunction()">
-                                Already participating
-
-
-                            </Button>
-                            :
-                            <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
-                                Participate
+                        {EventService.isParticipating(this.props.event.participantList,UserService.getCurrentUser().username) ?
+                        <Button raised disable="true">
+                            Already participating
                         </Button>
-                        }
+                        :
+                        UserService.isAuthenticated() ?
+                        <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
+                            Participate
+                        </Button> : <Button flat primary swapTheming>
+                                <Link to={'/login'}>Participate</Link>
+                            </Button>
+                    }
                     </CardText>
 
 
@@ -178,6 +179,21 @@ export class EventDetail extends React.Component {
                         mapElement={<div style={{ height: `100%` }} />}
                     />
                 </Card>
+
+                <Grid>
+                    <Cell size={6}>
+                        {UserService.isAuthenticated() && this.props.event.organiserUsername == UserService.getCurrentUser().username ?
+                            <Link to={`/edit/${this.props.event._id}`}><FontIcon>mode_edit</FontIcon></Link>
+                            : <div></div>
+                        }
+                    </Cell>
+                    <Cell size={6} style={{textAlign:'right'}}>
+                        {UserService.isAuthenticated() && this.props.event.organiserUsername == UserService.getCurrentUser().username ?
+                            <Button onClick={() => this.props.onDelete(this.props.event._id)} icon>delete</Button>
+                            : <div></div>
+                        }
+                    </Cell>
+                </Grid>
 
             </div>
 
