@@ -6,47 +6,33 @@ import BlogForm from './../components/BlogForm';
 import BlogService from '../services/BlogService';
 
 import Page from '../components/Page';
+import {Redirect} from "react-router-dom";
 
 class BlogFormView extends Component {
 
     constructor(props) {
         super(props);
+        this.state = {redirect:false}
     }
 
     componentWillMount(){
-        if (true){
+        if (typeof this.props.article === "undefined"){
             this.setState({
                 loading: false,
                 article: undefined,
                 error: undefined
             });
         }
-        else {
-            this.setState({
-                loading: true,
-                error: undefined
-            });
-
-            let id = this.props.match.params.id;
-
-            BlogService.getBlog(id).then((data) => {
-                this.setState({
-                    article: data,
-                    loading: false,
-                    error: undefined
-                });
-            }).catch((e) => {
-                console.error(e);
-            });
-        }
+        else
+            this.setState({ article : this.props.article })
 
     }
 
     updateArticle(article) {
-        if(this.state.article == undefined) {
+        if(this.state.article === undefined) {
             BlogService.createBlog(article).then((data) => {
                 console.log(article);
-                //this.props.history.push('/');
+                this.setState({redirec:true});
             }).catch((e) => {
                 console.error(e);
                 this.setState(Object.assign({}, this.state, {error: 'Error while creating article'}));
@@ -54,7 +40,7 @@ class BlogFormView extends Component {
         } else {
             BlogService.updateBlog(article).then((data) => {
                 console.log(article);
-                //this.props.history.goBack();
+                this.setState({redirect:true});
             }).catch((e) => {
                 console.error(e);
                 this.setState(Object.assign({}, this.state, {error: 'Error while updating Article'}));
@@ -65,11 +51,14 @@ class BlogFormView extends Component {
     render() {
         if (this.state.loading) {
             return (<h2>Loading...</h2>);
+        } else if (this.state.redirect){
+            //return (<Redirect to="/blog"/>)
         }
 
         return (
             <div className="modalOverlay">
                 <h1>Write a new Article</h1>
+                {console.log(this.state.article)}
                 <BlogForm article={this.state.article} onSubmit={(article) => this.updateArticle(article)} error={this.state.error} />
             </div>
         );

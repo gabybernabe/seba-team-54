@@ -104,18 +104,19 @@ export class EditButton extends React.Component {
         return (
             <div>
                 <div style={styleDiv}>
-                    <Button floating primary tooltipLabel="Edit this Post" className="editButton">
+                    <Button floating primary tooltipLabel="Edit this Post" className="editButton" onClick={this.show}>
                         <EditIcon/>
                     </Button>
                 </div>
+
                 <DialogContainer
                     visible={visible}
                     id="createBlogPostDialog"
                     onHide={this.hide}
                     modal
-                    actions={actions}
-                    dialogStyle={{width: "90%"}}>
-                    <p>Are you sure you want to delete this post?</p>
+                    actions = {actions}
+                    dialogStyle={{width:"90%"}}>
+                    <BlogFormView article={this.props.post}/>
                 </DialogContainer>
             </div>
         );
