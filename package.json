@@ -38,9 +38,9 @@
   },
   "dependencies": {
     "@material-ui/core": "^1.2.1",
+    "@material-ui/icons": "^1.1.0",
     "@types/googlemaps": "^3.30.10",
     "@types/markerclustererplus": "^2.1.33",
-    "@material-ui/icons": "^1.1.0",
     "ajv": "^6.5.1",
     "from": "^0.1.7",
     "hamburgers": "^0.9.3",
