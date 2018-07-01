@@ -1,7 +1,4 @@
 import React from 'react';
-import EventService from '../services/EventService';
-import styled from 'styled-components';
-import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { Card, CardTitle, CardText } from 'react-md';
 

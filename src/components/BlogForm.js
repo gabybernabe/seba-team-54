@@ -1,15 +1,13 @@
 "use strict";
 
 import React from 'react';
-import { Card, Button, TextField } from 'react-md';
+import { Button, TextField } from 'react-md';
 import { withRouter } from 'react-router-dom';
 import UserService from '../services/UserService';
-
 import { AlertMessage } from './AlertMessage';
 import BlogService from "../services/BlogService";
 
 
-const style = { maxWidth: 500 };
 
 
 class BlogForm extends React.Component {

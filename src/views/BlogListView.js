@@ -1,25 +1,10 @@
 import React from 'react';
-import EventService from '../services/EventService';
 import { BlogListItem} from '../components/BlogListItem';
-import styled from 'styled-components';
-import DatePicker from 'react-datepicker';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
-import { Card, CardTitle, CardText } from 'react-md';
 import Page from '../components/Page'
 import {WriteButton, EditButton, DeleteButton} from "../components/BlogPostButtons"
 
-import {FacebookShareButton,
-        FacebookIcon,
-        GooglePlusShareButton,
-        GooglePlusIcon,
-        LinkedinShareButton,
-        LinkedinIcon,
-        TwitterShareButton,
-        TwitterIcon} from 'react-share';
-
-import Button from "@material-ui/core/es/Button/Button";
-import AddIcon from '@material-ui/icons/Add';
 import BlogService from "../services/BlogService";
 import UserService from "../services/UserService";
 

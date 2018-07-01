@@ -9,7 +9,6 @@ import EventFormView from "./views/EventFormView";
 import Reviews from "./views/Reviews";
 import UserLoginView from "./views/UserLoginView";
 import UserSignupView from "./views/UserSignupView";
-
 import UserService from "./services/UserService";
 import {BlogListView} from "./views/BlogListView";
 import BlogPostView from "./views/BlogPostView";

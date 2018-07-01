@@ -1,11 +1,8 @@
 "use strict";
 
 import React, { Component} from 'react';
-
 import BlogForm from './../components/BlogForm';
 import BlogService from '../services/BlogService';
-
-import Page from '../components/Page';
 import {Redirect} from "react-router-dom";
 
 class BlogFormView extends Component {
@@ -32,7 +29,7 @@ class BlogFormView extends Component {
         if(this.state.article === undefined) {
             BlogService.createBlog(article).then((data) => {
                 console.log(article);
-                this.setState({redirec:true});
+                this.setState({redirect:true});
             }).catch((e) => {
                 console.error(e);
                 this.setState(Object.assign({}, this.state, {error: 'Error while creating article'}));
@@ -52,7 +49,7 @@ class BlogFormView extends Component {
         if (this.state.loading) {
             return (<h2>Loading...</h2>);
         } else if (this.state.redirect){
-            //return (<Redirect to="/blog"/>)
+            return (<Redirect to="/"/>);
         }
 
         return (

@@ -24,14 +24,6 @@ export class WriteButton extends Component {
             visible:false,
             redirect:false
         };
-        //FOR MODAL ON ON STARTUP
-       // if (typeof props.visible === "undefined" || !props.visible)
-       //     this.state = { visible:false };
-       // else
-       //     this.state = { visible:true };
-
-        console.log(props)
-        console.log(this.state)
         this.show = show.bind(this)
         this.hide = hide.bind(this)
         this.renderRedirect = renderRedirect.bind(this)
@@ -78,11 +70,11 @@ export class EditButton extends React.Component {
 
     constructor(props) {
         super(props)
-        const {classes} = props;
 
         this.state = {visible: false};
         this.show = show.bind(this)
         this.hide = hide.bind(this)
+        this.renderRedirect = renderRedirect.bind(this)
     };
 
     render() {
@@ -93,7 +85,7 @@ export class EditButton extends React.Component {
             children: 'Cancel',
             },
             {onClick: () => {
-                BlogService.updateBlog(article).then(
+                BlogService.updateBlog(this.props.post).then(
                     this.renderRedirect()
                 )},
             primary: true,
