@@ -16,7 +16,7 @@ class UserLoginView extends React.Component {
 
     login(user) {
         UserService.login(user.username, user.password).then((data) => {
-            this.props.history.goBack();
+            this.state.error ? console.error(this.state.error) :  this.props.history.goBack();
         }).catch((e) => {
             console.error(e);
             this.setState({
@@ -27,7 +27,7 @@ class UserLoginView extends React.Component {
 
     render() {
         return (
-          <UserLogin onSubmit={(user) => this.login(user)} error={this.state.error}></UserLogin>
+          <UserLogin onSubmit={(user) => this.login(user)} error={this.state.error}/>
         );
     }
 }
