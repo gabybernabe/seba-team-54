@@ -1,10 +1,9 @@
 import React from 'react';
 
 import EventService from '../services/EventService';
-import { EventList } from '../components/EventList';
 import styled from 'styled-components';
 import DatePicker from 'react-datepicker';
-import {Row, Col, PageHeader} from 'react-bootstrap';
+import {PageHeader} from 'react-bootstrap';
 import {Grid, Cell} from 'react-md';
 import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -83,10 +82,8 @@ const FilterButton = styled.button`
   border: none;
   border-radius: 8px;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-  
   &:hover {background-color: #a9a5a5}
-
-`
+`;
 
 
 class EventListView extends React.Component {
@@ -151,7 +148,6 @@ class EventListView extends React.Component {
         });
     }
 
-
     handleClick(click){
         EventService.getEvents('select', '').then((data) => {
             console.log(data);
@@ -198,9 +194,12 @@ class EventListView extends React.Component {
                 </div>
 
                 <div className="container">
-                    <Grid>
-                        {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
-                    </Grid>
+                    {this.state.data.length == 0
+                        ?   <DivLevel> <h2>Sorry, no hikes. You can organize your own hike!</h2> </DivLevel>
+                        :   <Grid>
+                             {this.state.data.map((event, i) => <Cell size={4}><EventCard key={i} event={event}/></Cell>)}
+                            </Grid>
+                    }
                 </div>
             </Page>
         );

@@ -186,7 +186,7 @@ class EventForm extends React.Component {
                             id="ParticipantsField"
                             type="number"
                             className="md-row"
-                            required={false}
+                            required={true}
                             value={this.state.participants}
                             onChange={this.handleChangeParticipants}/>
                         <TextField
