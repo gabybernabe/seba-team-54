@@ -1,7 +1,7 @@
 "use strict";
 
 import React from 'react';
-import { Card, CardTitle, CardText, Button, FontIcon} from 'react-md';
+import { Card, CardTitle, CardText, Button, FontIcon } from 'react-md';
 
 import Slider from "react-slick";
 import { Grid, Cell } from 'react-md';
@@ -31,13 +31,16 @@ export class EventDetail extends React.Component {
         };
 
         const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-            <GoogleMap defaultZoom={8} defaultCenter={{ lat: 47.4711256, lng: 10.976179 }}>
-                {props.isMarkerShown && <Marker position={{ lat: 47.4711256, lng: 10.976179 }} />}
+            <GoogleMap defaultZoom={8} defaultCenter={{ lat: 48.1412956, lng: 11.5569277 }}>
+                {props.isMarkerShown && <Marker position={{ lat: 48.1412956, lng: 11.5569277 }} />}
             </GoogleMap>
         ))
 
-        return (
+        for (let index = 0; index < this.props.event.participantList.length; index++) { 
+            <li>{this.props.event.participantList[index]}</li>      
+        }
 
+        return (
             <div style={{ marginTop: '2.9%', display: 'flex', marginLeft: '20px', marginRight: '20px' }}>
 
                 <Card style={{ width: '60%', fontSize: 'auto', boxSizing: 'border-box', wordBreak: 'break-all', marginRight: '30px', borderWidth: 0, borderRadius: 0 }} key={this.props.children}>
@@ -46,38 +49,40 @@ export class EventDetail extends React.Component {
                             <img src={this.props.event.imgUrls[0]} height="400px" width="680px" />
                         </div>
                         <div>
-                            <img src={this.props.event.imgUrls[0]} height="400px" width="680px" />
+                            <img src={this.props.event.imgUrls[1]} height="400px" width="680px" />
                         </div>
                         <div>
-                            <img src="https://img.oastatic.com/img2/10674769/600x300r/pfalz--pfa-lzer-ha-henweg.jpg" height="400px" width="680px" />
+                            <img src={this.props.event.imgUrls[0]} height="400px" width="680px" />
                         </div>
-
                     </Slider>
                     <CardTitle title={this.props.event.title} subtitle={this.props.event.organiserUsername} />
 
-
                     <CardText >
                         <h5>
-                            Departure: {this.props.event.location}
+                            <b>Departure: </b> {this.props.event.location}
                         </h5>
                         <h5>
-                            Participants: {this.props.event.participantList.length} / {this.props.event.participants}
+                            <b>Participants: </b> {this.props.event.participantList.length} / {this.props.event.participants}
                         </h5>
                         <h5>
-                            Level: {this.props.event.level}
+                            <b>Level: </b> {this.props.event.level}
                         </h5>
                         <h5>
-                            Time: {this.props.event.date}
+                            <b>Date: </b> {this.props.event.date}
                         </h5>
-                        <h5>
+                        <h5 style={{ wordBreak: 'break-all' }}>
                             {this.props.event.description}
                         </h5>
-                        <h5>
-                            List of participants: {this.prettifyParticipantList(this.props.event.participantList)}
+                        <h5 >
+                            <b>List of participants: </b>             
+                            <li>{this.props.event.participantList[0]} </li>
+                            <li>{this.props.event.participantList[1]} </li>
                         </h5>
+                        
+
                         {EventService.isParticipating(this.props.event.participantList, UserService.getCurrentUser().username) ?
 
-                            <Button raised onClick={() => this.props.onDelete(this.props.event._id.participantList.remove(username))} >Already Participating</Button>
+                            <Button raised onClick={() => this.props.onParticipate(this.props.event._id)}>Remove Participation</Button>
                             :
                             UserService.isAuthenticated() ?
                                 <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
@@ -85,7 +90,7 @@ export class EventDetail extends React.Component {
                         </Button>
                                 :
                                 <Button flat primary swapTheming>
-                                    <Link to={'/login'}>Login to participate</Link>
+                                    <Link style={{color:'white'}} to={'/login'}>Login to participate</Link>
                                 </Button>
 
                         }
@@ -116,8 +121,6 @@ export class EventDetail extends React.Component {
                         mapElement={<div style={{ height: `100%` }} />}
                     />
                 </Card>
-
-
 
             </div>
 

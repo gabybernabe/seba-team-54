@@ -99,7 +99,12 @@ export default class EventService {
         let oldEvent;
         EventService.getEvent(eventid).then((data) => {
             oldEvent = data;
-            if (oldEvent.participantList.indexOf(username) <= -1) oldEvent.participantList.push(username);
+            if (oldEvent.participantList.indexOf(username) > -1){
+                // de-register
+                oldEvent.participantList.pop();
+            } else {
+                oldEvent.participantList.push(username);
+            }
             EventService.updateEvent(oldEvent).then(() => {
                 console.log("Participant added");
             });
