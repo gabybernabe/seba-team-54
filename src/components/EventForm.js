@@ -4,7 +4,6 @@ import React from 'react';
 import { Card, Button, TextField, DatePicker, TimePicker, SelectField } from 'react-md';
 import { withRouter } from 'react-router-dom';
 import UserService from '../services/UserService';
-import moment from 'moment';
 
 import { AlertMessage } from './AlertMessage';
 
@@ -118,6 +117,7 @@ class EventForm extends React.Component {
     render() {
         const LEVEL_ITEMS = ['Easy', 'Medium', 'Hard', 'Expert'];
         const NUMBER_ITEMS = [0, 1, 2, 3, 4, 5, 10, 15, 20, 25, 30];
+        const TRANSPORT_ITEMS = ['Train', 'Bus', 'Car', 'Own transport'];
 
         return (
                 <Card style={style} className="md-block-centered">
@@ -177,6 +177,15 @@ class EventForm extends React.Component {
                             required={true}
                             value={this.state.participants}
                             onChange={this.handleChangeParticipants}/>
+                        <SelectField
+                            label="Transport"
+                            id="TransportsField"
+                            type="text"
+                            className="md-cell"
+                            menuItems={TRANSPORT_ITEMS}
+                            required={false}
+                            value={this.state.transport}
+                            onChange={this.handleChangeTransport}/>
                         <TextField
                             label="Description"
                             id="DescriptionField"
@@ -186,23 +195,20 @@ class EventForm extends React.Component {
                             className="md-row"
                             required={false}
                             value={this.state.description}
-                            onChange={this.handleChangeDescription}/>
+                            onChange={this.handleChangeDescription}
+                            helpText="Tell people more about the hike"
+                        />
                         <TextField
-                            label="Transport"
-                            id="TransportsField"
-                            type="text"
-                            className="md-row"
-                            required={false}
-                            value={this.state.transport}
-                            onChange={this.handleChangeTransport}/>
-                        <TextField
-                            label="Image URL"
+                            label="Image URLs"
                             id="ImgUrlsField"
+                            rows={1}
                             type="text"
                             className="md-row"
                             required={false}
                             value={this.state.imgUrls}
-                            onChange={this.handleChangeImgUrls}/>
+                            onChange={this.handleChangeImgUrls}
+                            helpText="Enter the URLS of your images separated with a comma."
+                        />
                         <Button id="submit" type="submit"
                                 disabled={this.state.title == undefined || this.state.title == '' || this.state.date == undefined || this.state.date == '' || this.state.level == ''}
                                 raised primary className="md-cell md-cell--2">Organize</Button>

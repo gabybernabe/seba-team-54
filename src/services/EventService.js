@@ -61,8 +61,6 @@ export default class EventService {
     }
 
     static createEvent(event) {
-        console.log(event.level);
-        console.log(event.date);
         let d = event.date;
         event.start = moment(d).format("YYYY-MM-DD").toString();
 
@@ -84,6 +82,9 @@ export default class EventService {
         event.id = Math.floor((Math.random() * 100000000) + 1).toString();
         if (event.imgUrls == "") {
             event.imgUrls = [imageArray[Math.floor((Math.random() * 12) + 1) - 1]];
+        } else {
+            let str = event.imgUrls;
+            event.imgUrls = str.split(",");
         }
         return new Promise((resolve, reject) => {
             HttpService.post(EventService.baseURL(), event, function(data) {
