@@ -30,14 +30,33 @@ export class EventDetail extends React.Component {
             slidesToScroll: 1,
         };
 
+        const urlAddress = "https://maps.googleapis.com/maps/api/geocode/json?address=+" + this.props.event.location + "&key=AIzaSyAXg2_VPNfWwGHlIPRcPM3yRrf-iPKWEL0"
+        var latitude = ""
+        var longitude = ""
+
+        function doFetch(url) {
+            console.log("2. Doing Fetch");
+            return fetch(url).then((res) => res.json())
+                ;
+        }
+
+        var coordinates = doFetch(urlAddress)
+        console.log(coordinates)
+
+        coordinates.then(function (result) {
+            console.log(result.results[0].geometry.location) //will log results.
+            latitude = result.results[0].geometry.location.lat
+            longitude = result.results[0].geometry.location.lng
+        })
+
         const MyMapComponent = withScriptjs(withGoogleMap((props) =>
-            <GoogleMap defaultZoom={8} defaultCenter={{ lat: 48.1412956, lng: 11.5569277 }}>
-                {props.isMarkerShown && <Marker position={{ lat: 48.1412956, lng: 11.5569277 }} />}
+            <GoogleMap defaultZoom={8} defaultCenter={{ lat: latitude, lng: longitude }}>
+                {props.isMarkerShown && <Marker position={{ lat: latitude, lng: longitude }} />}
             </GoogleMap>
         ))
 
-        for (let index = 0; index < this.props.event.participantList.length; index++) { 
-            <li>{this.props.event.participantList[index]}</li>      
+        for (let index = 0; index < this.props.event.participantList.length; index++) {
+            <li>{this.props.event.participantList[index]}</li>
         }
 
         return (
@@ -70,15 +89,10 @@ export class EventDetail extends React.Component {
                         <h5>
                             <b>Date: </b> {this.props.event.date}
                         </h5>
+                        <h4> <b>Description</b> </h4>
                         <h5 style={{ wordBreak: 'break-all' }}>
                             {this.props.event.description}
                         </h5>
-                        <h5 >
-                            <b>List of participants: </b>             
-                            <li>{this.props.event.participantList[0]} </li>
-                            <li>{this.props.event.participantList[1]} </li>
-                        </h5>
-                        
 
                         {EventService.isParticipating(this.props.event.participantList, UserService.getCurrentUser().username) ?
 
@@ -86,11 +100,11 @@ export class EventDetail extends React.Component {
                             :
                             UserService.isAuthenticated() ?
                                 <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
-                                    Participate
-                        </Button>
+                                    <Link style={{ color: 'white' }} to={`/participate/${this.props.event._id}`}>{'Participate'}</Link>
+                                </Button>
                                 :
                                 <Button flat primary swapTheming>
-                                    <Link style={{color:'white'}} to={'/login'}>Login to participate</Link>
+                                    <Link style={{ color: 'white' }} to={'/login'}>Login to participate</Link>
                                 </Button>
 
                         }
