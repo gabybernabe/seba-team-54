@@ -67,9 +67,9 @@ export class EventCard extends React.Component {
                 } subtitle={this.props.event.organiserUsername} style={{style}}>
 
                 </CardTitle>
-                <CardText style={{style}}>{this.props.event.level}</CardText>
-                <CardText style={{style}}>{this.props.event.location}</CardText>
-                <CardText style={{style}}>
+                <CardText style={{style, padding:'8px'}}>{this.props.event.level}</CardText>
+                <CardText style={{style, padding:'8px'}}>{this.props.event.location}</CardText>
+                <CardText style={{style, padding:'8px'}}>
                     {new Intl.DateTimeFormat('en-GB', {
                         year: 'numeric',
                         month: 'long',
