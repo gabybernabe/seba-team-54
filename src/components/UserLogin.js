@@ -81,6 +81,6 @@ class UserLogin extends React.Component {
             </Page>
         );
     }
-};
+}
 
 export default withRouter(UserLogin);

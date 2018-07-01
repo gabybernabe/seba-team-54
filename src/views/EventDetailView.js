@@ -33,6 +33,7 @@ class EventDetailView extends React.Component {
 
     participateEvent(id){
         EventService.participateEvent(id,UserService.getCurrentUser().username);
+        this.props.history.push('/');
     }
 
     deleteEvent(id){

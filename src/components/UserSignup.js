@@ -80,6 +80,6 @@ class UserSignup extends React.Component {
             </Page>
         );
     }
-};
+}
 
 export default withRouter(UserSignup);

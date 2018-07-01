@@ -1,6 +1,7 @@
 "use strict";
 
 import HttpService from './HttpService';
+import moment from 'moment';
 
 export default class EventService {
 
@@ -60,6 +61,9 @@ export default class EventService {
     }
 
     static createEvent(event) {
+        let d = event.date;
+        event.start = moment(d).format("YYYY-MM-DD").toString();
+
         const imageArray = [
             'https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg',
             'https://i.pinimg.com/originals/3c/d5/ff/3cd5ff662865c91f8753fc5224e02b44.jpg',
@@ -77,8 +81,10 @@ export default class EventService {
 
         event.id = Math.floor((Math.random() * 100000000) + 1).toString();
         if (event.imgUrls == "") {
-            var arr = [imageArray[Math.floor((Math.random() * 12) + 1) - 1]];
-            event.imgUrls = arr;
+            event.imgUrls = [imageArray[Math.floor((Math.random() * 12) + 1) - 1]];
+        } else {
+            let str = event.imgUrls;
+            event.imgUrls = str.split(",");
         }
         return new Promise((resolve, reject) => {
             HttpService.post(EventService.baseURL(), event, function(data) {
@@ -90,25 +96,19 @@ export default class EventService {
     }
 
     static participateEvent(eventid,username){
-        var oldEvent;
+        let oldEvent;
         EventService.getEvent(eventid).then((data) => {
             oldEvent = data;
-            if (oldEvent.participantList.indexOf(username) > -1){
-                // do nothing, already participant
-            } else {
-                oldEvent.participantList.push(username);
-            }
-            EventService.updateEvent(oldEvent);
+            if (oldEvent.participantList.indexOf(username) <= -1) oldEvent.participantList.push(username);
+            EventService.updateEvent(oldEvent).then(() => {
+                console.log("Participant added");
+            });
         }).catch((e) => {
             console.error(e);
         });
     }
 
     static isParticipating(participantList,username) {
-        if (participantList.indexOf(username) > -1){
-            return true;
-        } else {
-            return false;
-        }
+        return participantList.indexOf(username) > -1;
     }
 }
