@@ -96,6 +96,7 @@ export default class EventService {
             if (oldEvent.participantList.indexOf(username) > -1){
                 // do nothing, already participant
                 //should it ask to de-register?
+                oldEvent.participantList.pop();
             } else {
                 oldEvent.participantList.push(username);
             }

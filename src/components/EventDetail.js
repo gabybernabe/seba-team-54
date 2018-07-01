@@ -153,11 +153,15 @@ export class EventDetail extends React.Component {
                             Time: {this.props.event.start}
                         </h5>
                         <h5>
-                            List of participants: {this.prettifyParticipantList(this.props.event.participantList)}
+                            List of participants: {this.props.event.participantList}
                         </h5>
+
+
+
+
                         {EventService.isParticipating(this.props.event.participantList, UserService.getCurrentUser().username) ?
 
-                            <Button raised onClick={() => this.props.onDelete(this.props.event._id.participantList.remove(username))} >Already Participating</Button>
+                            <Button raised onClick={() => this.props.onParticipate(this.props.event._id)}>Remove Participation</Button>
                             :
                             UserService.isAuthenticated() ?
                                 <Button flat primary swapTheming onClick={() => this.props.onParticipate(this.props.event._id)}>
