@@ -140,13 +140,14 @@ class EventForm extends React.Component {
                             value={this.state.location}
                             onChange={this.handleChangeLocation}
                             errorText="Location is required"/>
-                        <DatePicker
+                        <TextField
                             label="Date"
                             id="DateField"
                             className="md-cell"
                             autoOk
                             value={this.state.date}
                             onChange={this.handleChangeDate}
+                            placeholder={"YYYY-MM-DD"}
                             errorText="Date is required"
                             required={true}/>
                         <TimePicker
