@@ -77,8 +77,7 @@ export default class EventService {
 
         event.id = Math.floor((Math.random() * 100000000) + 1).toString();
         if (event.imgUrls == "") {
-            var arr = [imageArray[Math.floor((Math.random() * 12) + 1) - 1]];
-            event.imgUrls = arr;
+            event.imgUrls = [imageArray[Math.floor((Math.random() * 12) + 1) - 1]];
         }
         return new Promise((resolve, reject) => {
             HttpService.post(EventService.baseURL(), event, function(data) {
@@ -90,15 +89,10 @@ export default class EventService {
     }
 
     static participateEvent(eventid,username){
-        var oldEvent;
+        let oldEvent;
         EventService.getEvent(eventid).then((data) => {
             oldEvent = data;
-            if (oldEvent.participantList.indexOf(username) > -1){
-                // do nothing, already participant
-                //should it ask to de-register?
-            } else {
-                oldEvent.participantList.push(username);
-            }
+            if (oldEvent.participantList.indexOf(username) <= -1) oldEvent.participantList.push(username);
             EventService.updateEvent(oldEvent).then(() => {
                 console.log("Participant added");
             });
@@ -108,10 +102,6 @@ export default class EventService {
     }
 
     static isParticipating(participantList,username) {
-        if (participantList.indexOf(username) > -1){
-            return true;
-        } else {
-            return false;
-        }
+        return participantList.indexOf(username) > -1;
     }
 }

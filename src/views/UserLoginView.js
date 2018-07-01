@@ -27,7 +27,7 @@ class UserLoginView extends React.Component {
 
     render() {
         return (
-          <UserLogin onSubmit={(user) => this.login(user)} error={this.state.error}></UserLogin>
+          <UserLogin onSubmit={(user) => this.login(user)} error={this.state.error}/>
         );
     }
 }
