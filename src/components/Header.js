@@ -4,7 +4,6 @@ import { Nav, Navbar, NavItem, NavDropdown, MenuItem } from 'react-bootstrap'
 import { withRouter} from 'react-router-dom';
 import {SimpleLink} from "./SimpleLink";
 import UserService from "../services/UserService";
-import UserLoginView from "../views/UserLoginView";
 
 
 class Header extends React.Component {
@@ -59,8 +58,8 @@ class Header extends React.Component {
                                 </NavDropdown>
                                 ]
                             :
-                                <NavItem eventKey={4.2}>
-                                    <UserLoginView/>
+                                <NavItem eventKey={4.2} onClick={() => this.props.history.push('/login')}>
+                                    Login
                                 </NavItem>
                         }
                 </Nav>
