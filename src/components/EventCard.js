@@ -53,7 +53,7 @@ export class EventCard extends React.Component {
                         year: 'numeric',
                         month: 'long',
                         day: '2-digit'
-                    }).format(Date.parse(this.props.event.start))}</CardText>
+                    }).format(Date.parse(this.props.event.date))}</CardText>
                 <Participate>
                     <Link style={{color:'white'}} to={`/participate/${this.props.event._id}`}>{'Join'}</Link>
                 </Participate>

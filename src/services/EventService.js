@@ -1,6 +1,7 @@
 "use strict";
 
 import HttpService from './HttpService';
+import moment from 'moment';
 
 export default class EventService {
 
@@ -60,6 +61,11 @@ export default class EventService {
     }
 
     static createEvent(event) {
+        console.log(event.level);
+        console.log(event.date);
+        let d = event.date;
+        event.start = moment(d).format("YYYY-MM-DD").toString();
+
         const imageArray = [
             'https://www.gapa.de/website/var/tmp/image-thumbnails/0/4284/thumb__gapaWysiwygImageRight/Wandern@2x.jpeg',
             'https://i.pinimg.com/originals/3c/d5/ff/3cd5ff662865c91f8753fc5224e02b44.jpg',

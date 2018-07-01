@@ -53,7 +53,7 @@ export class EventDetail extends React.Component {
                         </div>
 
                     </Slider>
-                    <CardTitle title={this.props.event.title} subtitle={this.props.event.description} />
+                    <CardTitle title={this.props.event.title} subtitle={this.props.event.organiserUsername} />
 
 
                     <CardText >
@@ -67,7 +67,10 @@ export class EventDetail extends React.Component {
                             Level: {this.props.event.level}
                         </h5>
                         <h5>
-                            Time: {this.props.event.start}
+                            Time: {this.props.event.date}
+                        </h5>
+                        <h5>
+                            {this.props.event.description}
                         </h5>
                         <h5>
                             List of participants: {this.prettifyParticipantList(this.props.event.participantList)}
