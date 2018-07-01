@@ -1,3 +1,5 @@
+"use strict";
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 
@@ -12,8 +14,6 @@ WebFontLoader.load({
 });
 
 ReactDOM.render(<App />, document.getElementById('app'));
-
-
 
 
 
